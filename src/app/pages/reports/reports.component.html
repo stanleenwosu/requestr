@@ -1,0 +1,23 @@
+<section class="p-1">
+  <h6>Your Transactions</h6>
+  <div class="my-2">
+    <nb-card *ngFor="let item of data">
+      <nb-card-header>
+        <span>{{ item.type | uppercase}}</span>
+        <span class="right">{{ item.timestamp | date}}</span>
+      </nb-card-header>
+      <nb-card-body>
+        <div>
+          <h5><span class="nb-text-primary">Amount: </span>{{ item.amount }}</h5>
+          <h6><span class="nb-text-primary">Channel: </span>{{ item.channel }}</h6>
+          <nb-tag status="warning" appearance="filled" text="warning"></nb-tag>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <div>
+          <button nbButton size="small">View Detail</button>
+        </div>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</section>

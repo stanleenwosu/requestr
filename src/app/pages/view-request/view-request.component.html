@@ -1,0 +1,35 @@
+<nb-card [nbSpinner]="!request">
+  <nb-card-header>
+    <span>{{ request?.name }}</span>
+    <button *ngIf="
+        fireS.UserInfo?.id === request?.createdBy && !request?.resolved
+      " class="mx-2" nbButton status="success" size="madium" (click)="cancel()">
+      Cancel Request
+    </button>
+  </nb-card-header>
+  <nb-card-body>
+    <div>
+      <nb-list>
+        <nb-list-item>
+          Created By: <b>{{ request?.createdBy }}</b>
+        </nb-list-item>
+        <nb-list-item>
+          Created on: <b>{{ request?.createdOn | date }}</b></nb-list-item>
+        <nb-list-item>
+          Assigned To: <b>{{ request?.assignedTo }}</b>
+        </nb-list-item>
+        <nb-list-item> Additional Info: {{ request?.detail }} </nb-list-item>
+        <nb-list-item>
+          Status: <b>{{ request?.status | uppercase }}</b>
+        </nb-list-item>
+        <nb-list-item *ngIf="request?.resolved">
+          Resolved On: <b>{{ request.resolvedOn }}</b>
+        </nb-list-item>
+      </nb-list>
+    </div>
+  </nb-card-body>
+  <nb-card-footer *ngIf="request?.assignedTo === fireS.UserInfo?.id && !request?.resolved">
+    <button class="mx-1" nbButton status="success" size="large" (click)="approve()">Approve</button>
+    <button class="mx-1" nbButton status="danger" size="large" (click)="deny()">Deny</button>
+  </nb-card-footer>
+</nb-card>

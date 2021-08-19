@@ -1,0 +1,54 @@
+<nb-list [nbSpinner]="loadingApprovals">
+  <nb-list-item
+    class="col-12 list-item"
+    *ngFor="let r of approvalsInView"
+    [ngClass]="{
+      brCompleted: r.status == rs.APPROVED,
+      brInprogress: r.status == rs.PENDING,
+      brCancelled: r.status == rs.CANCELLED
+    }"
+    (click)="view(r.id)"
+  >
+    <div class="list-item-inner">
+      <div class="row">
+        <div class="col-lg-4">
+          <label>{{ r.name }}</label>
+        </div>
+        <div class="col-2">
+          <span class="fs"
+            ><i class="fa fa-user mr-1" aria-hidden="true"></i
+            >{{ r.createdBy }}</span
+          >
+        </div>
+        <div class="col-3">
+          <span class="fs">{{ r.createdOn | date }}</span>
+        </div>
+        <!-- <div class="col-1">
+        <span
+          *ngIf="
+            todayDate > appS.toTimeStamp(task.dateDue) &&
+            r.status == ts.in_progress
+          "
+          class="text-danger"
+          ><i class="fas fa-stopwatch"></i
+        ></span>
+        </div> -->
+        <div class="col-2">
+          <div
+            class="font-weight-bold badge pj-badge"
+            [ngClass]="{
+              completed: r.status == rs.APPROVED,
+              inprogress: r.status == rs.PENDING,
+              cancelled: r.status == rs.CANCELLED
+            }"
+          >
+            {{ r.status }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </nb-list-item>
+  <nb-list-item *ngIf="approvalsInView.length == 0">
+    <label class="text-center" *ngIf="loadingApprovals === false">No Approval on List</label>
+  </nb-list-item>
+</nb-list>

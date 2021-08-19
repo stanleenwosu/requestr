@@ -1,0 +1,91 @@
+<section>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <nb-card>
+        <nb-card-header>
+          <label class="">Add a New User</label>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <label for="name">Name of User</label>
+                <input
+                  nbInput
+                  fullWidth
+                  fieldSize="medium"
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  formControlName="name"
+                />
+              </div>
+              <div class="input-group">
+                <label for="email">Email Address</label>
+                <input
+                  nbInput
+                  fullWidth
+                  fieldSize="medium"
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </div>
+              <div class="mt-2">
+                <label for="password">Password</label>
+                <nb-form-field>
+                  <input
+                    nbInput
+                    fullWidth
+                    type="password"
+                    name="name"
+                    formControlName="password"
+                  />
+                  <button
+                    nbSuffix
+                    nbButton
+                    ghost
+                    type="button"
+                    (click)="generatePassword()"
+                  >
+                    <nb-icon
+                      [icon]="'settings-2-outline'"
+                      pack="eva"
+                      [attr.aria-label]="'generate password'"
+                    >
+                    </nb-icon>
+                  </button>
+                </nb-form-field>
+              </div>
+
+              <div class="mt-3">
+                <button type="submit" nbButton fullWidth status="primary">
+                  Add User
+                </button>
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </form>
+</section>
+
+<section>
+  <div>
+    <nb-card>
+      <nb-card-header>
+        <label class="">Users</label>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-list>
+          <nb-list-item *ngFor="let user of users">
+            <nb-user size="small" [name]="user.name" [title]="user.role">
+            </nb-user>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</section>
