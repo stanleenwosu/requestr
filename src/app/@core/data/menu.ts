@@ -20,12 +20,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Reports',
-    icon: 'bar-chart-2-outline',
-    link: '/report',
-    home: true,
-  },
-  {
     title: 'Users',
     icon: 'people-outline',
     link: '/users',

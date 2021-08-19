@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ViewRequestComponent } from './view-request.component';
 import { RouterModule } from '@angular/router';
 import { NbButtonModule, NbCardModule, NbListModule, NbSpinnerModule } from '@nebular/theme';
+import { PipesModule } from 'app/pipes/pipes.module';
 
 
 
@@ -19,7 +20,8 @@ import { NbButtonModule, NbCardModule, NbListModule, NbSpinnerModule } from '@ne
     NbCardModule,
     NbListModule,
     NbButtonModule,
-    NbSpinnerModule
+    NbSpinnerModule,
+    PipesModule
   ]
 })
 export class ViewRequestModule { }

@@ -38,7 +38,7 @@
                   placeholder="Select User"
                   formControlName="userId"
                 >
-                  <nb-option *ngFor="let user of users" [value]="user.name"
+                  <nb-option *ngFor="let user of users" [value]="user.id"
                     >{{ user.name }} | {{ user.email }}</nb-option
                   >
                 </nb-select>
@@ -50,7 +50,7 @@
               </div>
             </div>
             <div class="col-4">
-              <p>Upload a file</p>
+              <!-- <p>Upload a file</p> -->
             </div>
           </div>
         </nb-card-body>
@@ -65,7 +65,7 @@
       <label class="">All Requests</label>
     </nb-card-header>
     <nb-card-body>
-      <cmp-requests></cmp-requests>
+      <cmp-requests [new]="newRequest"></cmp-requests>
     </nb-card-body>
   </nb-card>
 </section>

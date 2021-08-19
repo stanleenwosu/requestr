@@ -9,6 +9,7 @@ import {
 } from '@nebular/auth';
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
   {
     path: "",
     component: PagesComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -45,19 +47,6 @@ const routes: Routes = [
         path: 'users',
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
       },
-
-      /* {
-        path: 'deposit',
-        loadChildren: () => import('./deposit/deposit.module').then(m => m.DepositModule)
-      },
-      {
-        path: 'withdrawal',
-        loadChildren: () => import('./withdrawal/withdrawal.module').then(m => m.WithdrawalModule)
-      }, */
-      {
-        path: 'report',
-        loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule)
-      }
     ]
   },
   {

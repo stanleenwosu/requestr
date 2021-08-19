@@ -14,6 +14,7 @@ export class RequestsComponent implements OnInit {
 
   users:User[] = []
   requestForm: FormGroup
+  newRequest:Request;
   tp = NbGlobalPhysicalPosition.BOTTOM_RIGHT
   constructor(
     private fb: FormBuilder,
@@ -36,7 +37,7 @@ export class RequestsComponent implements OnInit {
     this.users = this.users.filter(u => u.id !== this.fireS.UserInfo.id)
   }
 
-  submit() {
+  async submit() {
     const d = Date.now()
     const {name, detail, userId} = this.requestForm.value
     const request: Request = {
@@ -50,9 +51,9 @@ export class RequestsComponent implements OnInit {
       active: true,
       timestamp: d
     }
-    console.log(request)
     try {
-      this.fireS.addRequest(request);
+      await this.fireS.addRequest(request);
+      this.newRequest = request
       this.toastr.success(`${request.id} added`, "New Request", {
         duration: 2000,
         position: this.tp,

@@ -57,7 +57,7 @@ export class FirebaseService {
 
   async updateRequest(request: Request) {
     const res = await this.rDB.where('id', '==', request.id).get()
-    if (res.docs.length > 1) {
+    if (res.docs.length > 0) {
       return this.rDB.doc(res.docs[0].id).update(request)
     }
     return null
@@ -67,6 +67,12 @@ export class FirebaseService {
     return this.uDB.add(user);
   }
 
+  async getUser(id: string) {
+    const res = await this.uDB.where('id', '==', id).get();
+    if (res.docs.length > 0)
+      return res.docs[0].data() as User
+    return null
+  }
   async getRequest(id: string) {
     const res = await this.rDB.where("id", "==", id).get();
     if (res.docs.length > 0) {

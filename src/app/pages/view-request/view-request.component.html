@@ -11,12 +11,12 @@
     <div>
       <nb-list>
         <nb-list-item>
-          Created By: <b>{{ request?.createdBy }}</b>
+          Created By: <b>{{ request?.createdBy | getName | async }}</b>
         </nb-list-item>
         <nb-list-item>
           Created on: <b>{{ request?.createdOn | date }}</b></nb-list-item>
         <nb-list-item>
-          Assigned To: <b>{{ request?.assignedTo }}</b>
+          Assigned To: <b>{{ request?.assignedTo | getName | async }}</b>
         </nb-list-item>
         <nb-list-item> Additional Info: {{ request?.detail }} </nb-list-item>
         <nb-list-item>

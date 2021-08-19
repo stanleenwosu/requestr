@@ -4,6 +4,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { NbCardModule, NbListModule, NbSpinnerModule } from '@nebular/theme';
 import { DemoBlockComponent } from './demo-block/demo-block.component';
 import { ApprovalsComponent } from './approvals/approvals.component';
+import { PipesModule } from 'app/pipes/pipes.module';
 
 const components = [
   RequestsComponent,
@@ -17,7 +18,8 @@ const components = [
     CommonModule,
     NbListModule,
     NbCardModule,
-    NbSpinnerModule
+    NbSpinnerModule,
+    PipesModule
   ],
   exports: [components]
 })
