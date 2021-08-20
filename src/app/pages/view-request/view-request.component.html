@@ -1,6 +1,6 @@
 <nb-card [nbSpinner]="!request">
   <nb-card-header>
-    <span>{{ request?.name }}</span>
+    <h4>{{ request?.name }}</h4>
     <button *ngIf="
         fireS.UserInfo?.id === request?.createdBy && !request?.resolved
       " class="mx-2" nbButton status="success" size="madium" (click)="cancel()">
@@ -23,8 +23,18 @@
           Status: <b>{{ request?.status | uppercase }}</b>
         </nb-list-item>
         <nb-list-item *ngIf="request?.resolved">
-          Resolved On: <b>{{ request.resolvedOn }}</b>
+          Resolved On: <b>{{ request?.resolvedOn }}</b>
         </nb-list-item>
+        <nb-list-item>
+          Comment: <b>{{ request?.comment  }}</b>
+        </nb-list-item>
+        <nb-list-item>
+          Attachment: <a *ngIf="request?.attachment" [href]="request?.attachment" target="_blank">
+            Click to Download"
+            </a>
+            <span *ngIf="!request?.attachment"> None</span>
+        </nb-list-item>
+
       </nb-list>
     </div>
   </nb-card-body>

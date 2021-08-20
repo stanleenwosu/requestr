@@ -7,9 +7,11 @@ export interface Request {
   status: RequestStatus;
   comment?: string[] | string;
   createdOn: number;
+  deadline?:number;
   resolved?: boolean;
   resolvedOn?: number;
   active?:boolean;
+  attachment?: any;
   timestamp: number;
 }
 

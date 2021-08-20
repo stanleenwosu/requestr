@@ -13,6 +13,7 @@ export class RequestsComponent implements OnInit {
   requestsInView: Request[] = []
   loadingRequests = true
   rs = RequestStatus
+  todayDate = Date.now()
   constructor(
     private fireS: FirebaseService,
     private router: Router
