@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbAlertModule, NbButtonModule,NbCheckboxModule, NbInputModule, NbIconModule, NbToastrModule } from '@nebular/theme';
+import { NbAlertModule, NbButtonModule,NbCheckboxModule, NbInputModule, NbIconModule, NbToastrModule, NbSelectModule } from '@nebular/theme';
 import { RegisterComponent } from './register/register.component';
 import { LoginHandlerComponent } from './login-handler/login-handler.component';
 
@@ -26,6 +26,7 @@ const AuthComponents = [
     NbButtonModule,
     NbCheckboxModule,
     NbToastrModule,
+    NbSelectModule,
     NbIconModule,
     RouterModule.forChild([
       {

@@ -13,7 +13,8 @@ export interface User {
 
 export enum UserRoles {
   ADMIN = 'admin',
-  USER = 'user'
+  STAFF = 'staff',
+  VENDOR = 'vendor'
 }
 
 export interface Contacts {

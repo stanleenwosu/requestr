@@ -63,7 +63,12 @@ export class FirebaseService {
     return null
   }
 
-  addUser(user: User) {
+  async addUser(user: User) {
+    const res = await this.uDB.where('email', '==', user.email).get()
+    console.log(res)
+    if (res.docs.length > 0){
+      throw new Error("User Exists");
+    }
     return this.uDB.add(user);
   }
 

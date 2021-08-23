@@ -10,7 +10,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class LoginHandlerComponent implements OnInit {
   tp = NbGlobalPhysicalPosition.BOTTOM_RIGHT;
-  user:{email:string, password:string}
+  user: any
+  type: string
   constructor(
     private toastr: NbToastrService,
     private router: Router,
@@ -19,15 +20,40 @@ export class LoginHandlerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.user = this.route.snapshot.params as any
+    this.user = history.state.user as any
     console.log(this.user)
-    this.login()
+
+    this.type = history.state.type
+    if (this.type === 'login') {
+      this.login()
+    }
+    if (this.type === 'signup') {
+      this.signup()
+    }
   }
 
+  async signup() {
+    try {
+      this.user.timestamp = Date.now()
+      await this.fireS.addUser(this.user);
+      this.toastr.success(`User`, "User Signed up Successful", {
+        duration: 3000,
+        position: this.tp,
+      });
+      this.fireS.UserInfo = this.user
+      this.router.navigate(['dashboard'])
+    } catch (error) {
+      this.toastr.danger(`Signup Error`, error, {
+        duration: 3000,
+        position: this.tp,
+      });
+      this.router.navigate(['auth'])
+    }
+
+  }
   async login() {
     try {
       const res = await this.fireS.login(this.user.email, this.user.password);
-      console.log(res);
       if (res) {
         this.toastr.success(`User logged in`, "Login Successful", {
           duration: 3000,
@@ -38,7 +64,6 @@ export class LoginHandlerComponent implements OnInit {
       }
       throw new Error("User details are incorrect");
     } catch (error) {
-      console.log(error)
       this.toastr.danger(`Login Error`, error, {
         duration: 3000,
         position: this.tp,
