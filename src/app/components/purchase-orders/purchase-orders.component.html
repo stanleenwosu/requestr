@@ -24,10 +24,10 @@
     <div class="list-item-inner">
       <div class="row">
         <div class="col-md-2">
-          <span>{{ o.id }}</span>
+          <span class="fs">{{ o.id }}</span>
         </div>
         <div class="col-md-3">
-          <span class="fs"><i class="fa fa-user mr-1" aria-hidden="true"></i>{{ o.createdBy | getName | async }}</span>
+          <span class="fs">{{ o.createdBy | getName | async }}</span>
         </div>
         <div class="col-md-3">
           <span class="fs">{{ o.createdOn | date }}</span>

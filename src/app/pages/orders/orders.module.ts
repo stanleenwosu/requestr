@@ -15,6 +15,10 @@ import { ComponentsModule } from 'app/components/components.module';
       {
         path:'',
         component:OrdersComponent
+      },
+      {
+        path:':id',
+        loadChildren: () => import ('./view-order/view-order.module').then(m => m.ViewOrderModule)
       }
     ]),
     NbCardModule,

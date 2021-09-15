@@ -24,12 +24,11 @@ export class PurchaseOrdersComponent implements OnInit {
 
   async init() {
     this.ordersInView = await this.orderS.getPurchaseOrders();
-    console.log(this.ordersInView)
     this.loadingOrders = false
   }
 
   view(id: string) {
-    //this.router.navigate(['/requests', id])
+    this.router.navigate(['/orders', id])
   }
 
 }
