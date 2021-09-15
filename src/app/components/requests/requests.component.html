@@ -19,7 +19,9 @@
           <span *ngIf="
             todayDate > r.deadline &&
             r.status == rs.PENDING
-          " class="text-danger"><nb-icon icon="clock-outline"></nb-icon></span>
+          " class="text-danger">
+            <nb-icon icon="clock-outline"></nb-icon>
+          </span>
         </div>
         <div class="col-2">
           <div class="font-weight-bold badge pj-badge" [ngClass]="{
@@ -27,7 +29,7 @@
               inprogress: r.status == rs.PENDING,
               cancelled: r.status == rs.CANCELLED
             }">
-            {{ r.status }}
+            {{ r.status | uppercase }}
           </div>
         </div>
       </div>

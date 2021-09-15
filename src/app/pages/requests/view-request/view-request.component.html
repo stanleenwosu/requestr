@@ -1,0 +1,50 @@
+<nb-card [nbSpinner]="!rfo">
+  <nb-card-header>
+    <h4>{{ rfo?.name }}</h4>
+    <button *ngIf="
+        userS.UserInfo?.id === rfo?.createdBy && !rfo?.resolved
+      " class="mx-2" nbButton status="danger" size="madium" (click)="cancel()">
+      Cancel RFO
+    </button>
+  </nb-card-header>
+  <nb-card-body>
+    <div>
+      <nb-list>
+        <nb-list-item>
+          Created By: <b>{{ rfo?.createdBy | getName | async }}</b>
+        </nb-list-item>
+        <nb-list-item>
+          Created on: <b>{{ rfo?.createdOn | date }}</b></nb-list-item>
+        <nb-list-item>
+          Assigned To: <b>{{ rfo?.assignedTo | getName | async }}</b>
+        </nb-list-item>
+        <nb-list-item> Additional Info: {{ rfo?.detail }} </nb-list-item>
+        <nb-list-item>
+          Status: <b>{{ rfo?.status | uppercase }}</b>
+        </nb-list-item>
+        <nb-list-item *ngIf="rfo?.resolved">
+          Resolved On: <b>{{ rfo?.resolvedOn }}</b>
+        </nb-list-item>
+        <nb-list-item>
+          Comment: <b>{{ rfo?.comment }}</b>
+        </nb-list-item>
+        <nb-list-item>
+          Attachment: <a *ngIf="rfo?.attachment" [href]="rfo?.attachment" target="_blank">
+            Click to Download"
+          </a>
+          <span *ngIf="!rfo?.attachment"> None</span>
+        </nb-list-item>
+
+      </nb-list>
+    </div>
+  </nb-card-body>
+  <nb-card-footer *ngIf="userS.UserInfo?.role == role.ADMIN && !rfo?.resolved">
+    <p class="text-danger mb-2">
+      Note: Once a request is Approved or Denied, it can be changed.
+      Changes will have to be made from purchase order
+    </p>
+
+    <button class="mx-1" nbButton status="success" size="large" (click)="approve()">Approve</button>
+    <button class="mx-1" nbButton status="danger" size="large" (click)="deny()">Deny</button>
+  </nb-card-footer>
+</nb-card>

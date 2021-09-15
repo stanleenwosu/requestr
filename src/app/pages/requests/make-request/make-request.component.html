@@ -1,0 +1,99 @@
+<section>
+  <form [formGroup]="requestForm">
+    <div>
+      <nb-card>
+        <nb-card-header>
+          <label class="">Make a Request</label>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-12">
+              <div class="input-group">
+                <label for="name">Enter Title of Request</label>
+                <input nbInput fullWidth fieldSize="medium" type="text" name="name" class="form-control"
+                  formControlName="name" />
+              </div>
+
+
+              <div class="items mt-3" formArrayName="items">
+                <label>Enter Items</label>
+                <div class="item py-2" *ngFor="let item of items().controls; let i = index" [formGroupName]='i'>
+                  <div class="name"><input nbInput fullWidth type="text" formControlName="name"
+                      placeholder="Item Description" class="form-control" /></div>
+                  <div class="amount"><input nbInput fullWidth type="text" formControlName="amount"
+                      placeholder="Unit Price" class="form-control" /></div>
+                  <div class="quantity"><input nbInput fullWidth type="number" formControlName="quantity"
+                      placeholder="Qty" class="form-control" /></div>
+                  <div class="total"><input nbInput fullWidth type="text" formControlName="total" placeholder="Total"
+                      class="form-control" /></div>
+                  <div><button type="button" nbButton size="small" status="danger" (click)="removeItem(i)">Remove</button></div>
+                </div>
+                <div class="mt-2">
+                  <button type="button" nbButton size="small" status="primary" (click)="addItem()">
+                    Add New Item
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-3">
+                <label for="calender">Select Deadline (If available)</label>
+                <nb-calendar size="medium" (dateChange)="handleDateChange($event)"></nb-calendar>
+              </div>
+
+              <div class="input-group">
+                <label for="detail">Additional Information</label>
+                <textarea nbInput fullWidth name="detail" formControlName="detail" class="form-control"></textarea>
+              </div>
+
+
+              <!-- <div class="mt-3">
+                <label for="user">Request From</label>
+                <nb-select fullWidth name="user" placeholder="Select User" formControlName="userId">
+                  <nb-option *ngFor="let user of users" [value]="user.id">{{ user.name }} | {{ user.email }}</nb-option>
+                </nb-select>
+              </div>
+ -->
+              <div class="mt-3">
+                <label>Upload Attachment</label>
+                <div class="card my-3 bg-gray">
+                  <label class="card-header text-secondary">Upload Files</label>
+                  <div class="card-body">
+                    <div class="col-12 p-5 text-center add-file">
+                      <input #file class="file_upload" id="file" type="file" (change)="upload(file.files)" />
+                      <div *ngIf="!fileInfo; else fileExist">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>
+                        <p class="text-secondary">Click to add a file</p>
+                      </div>
+                      <ng-template #fileExist>
+                        <div class="text-center">
+                          <h4 class="text-secondary">{{ fileInfo?.name }}</h4>
+                          <p class="text-secondary">{{ fileInfo?.size / 1024 | number }}kb</p>
+                        </div>
+                      </ng-template>
+                      <p class="text-danger" *ngIf="msgDisplay.type">* {{ msgDisplay?.msg }}</p>
+                    </div>
+                  </div>
+                  <!--  <div class="col-12 my-2 p-1">
+                  <button type="button" nbButton status="primary" [disabled]="!fileInfo" class="w-100 p-3"
+                    (click)="uploadFiles()">
+                    UPLOAD FILE
+                  </button>
+                </div> -->
+                </div>
+              </div>
+
+
+              <div class="mt-3">
+                <button type="submit" [disabled]="requestForm.invalid" nbButton fullWidth status="primary"
+                  (click)="uploadToDB()">
+                  Submit Request
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </form>
+</section>

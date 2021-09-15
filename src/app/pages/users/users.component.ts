@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NbGlobalPhysicalPosition, NbToastrService } from "@nebular/theme";
 import { User } from "app/@core/data/users";
-import { FirebaseService } from "app/services/firebase.service";
+import { UserService } from "app/services/user.service";
 
 @Component({
   selector: "users",
@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
   users: User[]
   constructor(
     private fb: FormBuilder,
-    private fireS: FirebaseService,
+    private userS: UserService,
     private toastr: NbToastrService
   ) { }
 
@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
   }
 
   async init() {
-    this.users = await this.fireS.getUsers()
+    this.users = await this.userS.getUsers()
     return;
   }
   submit() {
@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit {
         password: password,
         timestamp: d,
       };
-      this.fireS.addUser(user);
+      this.userS.addUser(user);
       this.toastr.success(`${name} added`, "New User", {
         duration: 2000,
         position: this.tp,

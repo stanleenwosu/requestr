@@ -1,0 +1,73 @@
+<section>
+  <form [formGroup]="form" (ngSubmit)="create()">
+    <div>
+      <nb-card>
+        <nb-card-header>
+          <label class="">Create a New Department</label>
+        </nb-card-header>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="input-group">
+                <input nbInput fullWidth fieldSize="medium" type="text" placeholder="Department Name"
+                  class="form-control" formControlName="name" />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="input-group">
+                <input nbInput fullWidth fieldSize="medium" type="text" placeholder="Description" class="form-control"
+                  formControlName="description" />
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div>
+                <button nbButton type="submit" size="small" status="primary">
+                  Create
+                </button>
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </form>
+</section>
+
+<section>
+  <div>
+    <nb-card>
+      <nb-card-header>
+        <label class="">All Departments</label>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="row mb-2 grey">
+          <div class="col-md-3">
+            <label>Name</label>
+          </div>
+          <div class="col-md-4">
+            <label>Description</label>
+          </div>
+          <div class="col-md-3">
+            <label>Created On</label>
+          </div>
+        </div>
+        <div class="row py-2 item" *ngFor="let dept of departments">
+          <div class="col-md-3">
+            <p>{{ dept.name }}</p>
+          </div>
+          <div class="col-md-4">
+            <p>{{ dept.description }}</p>
+          </div>
+          <div class="col-md-3">
+            <p>{{ dept.createdOn | date}}</p>
+          </div>
+          <div class="col-md-2">
+            <button (click)="delete(dept.id)" nbButton size="small" status="danger">Delete</button>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</section>

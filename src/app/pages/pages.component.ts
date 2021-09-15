@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from 'app/services/user.service';
 import { MENU_ITEMS } from '../@core/data/menu';
 
 @Component({
@@ -12,5 +13,16 @@ import { MENU_ITEMS } from '../@core/data/menu';
   `,
 })
 export class PagesComponent {
-  menu = MENU_ITEMS;
+  menu = []
+  constructor(
+    public userS: UserService
+  ) {
+    console.log(MENU_ITEMS)
+    if (userS.UserInfo) {
+      this.menu = MENU_ITEMS.filter(m => m.role.includes(userS.UserInfo.role))
+    } else {
+      this.menu = MENU_ITEMS
+    }
+
+  }
 }

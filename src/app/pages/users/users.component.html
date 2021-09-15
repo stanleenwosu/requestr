@@ -10,50 +10,20 @@
             <div class="col-md-6">
               <div class="input-group">
                 <label for="name">Name of User</label>
-                <input
-                  nbInput
-                  fullWidth
-                  fieldSize="medium"
-                  type="text"
-                  name="name"
-                  class="form-control"
-                  formControlName="name"
-                />
+                <input nbInput fullWidth fieldSize="medium" type="text" name="name" class="form-control"
+                  formControlName="name" />
               </div>
               <div class="input-group">
                 <label for="email">Email Address</label>
-                <input
-                  nbInput
-                  fullWidth
-                  fieldSize="medium"
-                  type="email"
-                  name="email"
-                  class="form-control"
-                  formControlName="email"
-                />
+                <input nbInput fullWidth fieldSize="medium" type="email" name="email" class="form-control"
+                  formControlName="email" />
               </div>
               <div class="mt-2">
                 <label for="password">Password</label>
                 <nb-form-field>
-                  <input
-                    nbInput
-                    fullWidth
-                    type="password"
-                    name="name"
-                    formControlName="password"
-                  />
-                  <button
-                    nbSuffix
-                    nbButton
-                    ghost
-                    type="button"
-                    (click)="generatePassword()"
-                  >
-                    <nb-icon
-                      [icon]="'settings-2-outline'"
-                      pack="eva"
-                      [attr.aria-label]="'generate password'"
-                    >
+                  <input nbInput fullWidth type="password" name="name" formControlName="password" />
+                  <button nbSuffix nbButton ghost type="button" (click)="generatePassword()">
+                    <nb-icon [icon]="'settings-2-outline'" pack="eva" [attr.aria-label]="'generate password'">
                     </nb-icon>
                   </button>
                 </nb-form-field>

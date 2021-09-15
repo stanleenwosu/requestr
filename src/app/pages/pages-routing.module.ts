@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path: "",
     component: PagesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [],
     children: [
       {
         path: '',
@@ -36,12 +36,32 @@ const routes: Routes = [
         loadChildren: () => import('./requests/requests.module').then(m => m.RequestsModule)
       },
       {
-        path: 'requests/:id',
-        loadChildren: () => import('./view-request/view-request.module').then(m => m.ViewRequestModule)
+        path: 'orders',
+        loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
       },
       {
-        path: 'approvals',
-        loadChildren: () => import('./approvals/approvals.module').then(m => m.ApprovalsModule)
+        path: 'deliveries',
+        loadChildren: () => import('./deliveries/deliveries.module').then(m => m.DeliveriesModule)
+      },
+      {
+        path: 'invoices',
+        loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesModule)
+      },
+      {
+        path: 'suppliers',
+        loadChildren: () => import('./suppliers/suppliers.module').then(m => m.SuppliersModule)
+      },
+      {
+        path: 'departments',
+        loadChildren: () => import('./departments/departments.module').then(m => m.DepartmentsModule)
+      },
+      {
+        path: 'employees',
+        loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule)
+      },
+      {
+        path: 'payments',
+        loadChildren: () => import('./payments/payments.module').then(m => m.PaymentsModule)
       },
       {
         path: 'users',

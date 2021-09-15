@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FirebaseService } from 'app/services/firebase.service';
+import { UserService } from 'app/services/user.service';
 
 @Pipe({
   name: 'filter'
@@ -22,10 +22,13 @@ export class GetNamePipe implements PipeTransform {
     return this.getName(id)
   }
   constructor(
-    private fireS: FirebaseService) {
+    private userS: UserService) {
   }
   async getName(id: string) {
-    const res = await this.fireS.getUser(id)
+    if (!id) {
+      return id;
+    }
+    const res = await this.userS.getUser(id)
     const name = res.name;
     return name;
   }

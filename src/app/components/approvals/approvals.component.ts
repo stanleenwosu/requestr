@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Request, RequestStatus } from 'app/@core/data/model';
-import { FirebaseService } from 'app/services/firebase.service';
+import { RFO_Status } from 'app/@core/data/model';
+import { RequestService } from 'app/services/request.service';
 @Component({
   selector: 'cmp-approvals',
   templateUrl: './approvals.component.html',
@@ -11,9 +11,9 @@ export class ApprovalsComponent implements OnInit {
 
   approvalsInView: Request[] = []
   loadingApprovals = true
-  rs = RequestStatus
+  rs = RFO_Status
   constructor(
-    private fireS: FirebaseService,
+    private reqS: RequestService,
     private router: Router
   ) { }
 
@@ -24,7 +24,7 @@ export class ApprovalsComponent implements OnInit {
   }
 
   async init() {
-   this.approvalsInView = await this.fireS.getApprovals()
+   this.approvalsInView = await this.reqS.getRFOs(10)
    this.loadingApprovals = false
   }
 

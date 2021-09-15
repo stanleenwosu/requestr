@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FirebaseService } from 'app/services/firebase.service';
 
 @Component({
   selector: 'ngx-dashboard',
@@ -7,8 +6,5 @@ import { FirebaseService } from 'app/services/firebase.service';
 })
 export class DashboardComponent {
   constructor(
-    public fireS:FirebaseService
-  ){
-
-  }
+  ) { }
 }

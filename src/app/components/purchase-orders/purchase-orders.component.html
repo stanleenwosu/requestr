@@ -1,0 +1,68 @@
+<nb-list [nbSpinner]="loadingOrders">
+  <nb-list-item
+    class="col-12 list-item"
+    *ngFor="let o of ordersInView"
+    [ngClass]="{
+      brCompleted: o.status == ps.BIDDING,
+      brCompleted: o.status == ps.ASSIGNED,
+      brInprogress: o.status == ps.PAUSED,
+      brCancelled: o.status == ps.CANCELLED
+    }"
+    (click)="view(o.id)"
+  >
+    <div class="list-item-inner">
+      <div class="row header-row">
+        <div class="col-md-2">
+          <label>Id</label>
+        </div>
+        <div class="col-md-3">
+          <label> Order By</label>
+        </div>
+        <div class="col-md-3">
+          <label>Created On</label>
+        </div>
+        <div class="col-md-2">
+          <label>Status</label>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <span>{{ o.id }}</span>
+        </div>
+        <div class="col-md-3">
+          <span class="fs"
+            ><i class="fa fa-user mr-1" aria-hidden="true"></i
+            >{{ o.createdBy | getName | async }}</span
+          >
+        </div>
+        <div class="col-md-3">
+          <span class="fs">{{ o.createdOn | date }}</span>
+        </div>
+        <div class="col-md-2">
+          <div
+            class="font-weight-bold badge pj-badge"
+            [ngClass]="{
+              completed: o.status == ps.BIDDING,
+              completed: o.status == ps.ASSIGNED,
+              inprogress: o.status == ps.PAUSED,
+              cancelled: o.status == ps.CANCELLED
+            }"
+          >
+            {{ o.status | uppercase }}
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button type="button" nbButton size="small" status="default">
+            Bid
+          </button>
+        </div>
+      </div>
+    </div>
+  </nb-list-item>
+  <nb-list-item *ngIf="ordersInView.length == 0">
+    <label class="text-center" *ngIf="loadingOrders === false"
+      >No Current Orders</label
+    >
+  </nb-list-item>
+</nb-list>

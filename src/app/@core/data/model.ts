@@ -1,10 +1,11 @@
-export interface Request {
+export interface RFO {
   id: string;
   name: string;
+  items: RItem[];
   detail?: string;
   createdBy: any;
-  assignedTo: any;
-  status: RequestStatus;
+  assignedTo?: any;
+  status: RFO_Status;
   comment?: string[] | string;
   createdOn: number;
   deadline?:number;
@@ -15,9 +16,16 @@ export interface Request {
   timestamp: number;
 }
 
-export enum RequestStatus {
+export enum RFO_Status {
   APPROVED = 'approved',
   PENDING = 'pending',
   REJECTED = 'rejected',
   CANCELLED = 'cancelled'
+}
+
+export interface RItem {
+  name:string;
+  price: string;
+  quantity: number;
+  total:string;
 }

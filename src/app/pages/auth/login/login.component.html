@@ -1,5 +1,5 @@
 <h1 id="title" class="title">Requestr</h1>
-<p class="sub-title"><b>Login to Continue as {{ role }}</b></p>
+
 
 <section class="another-action mb-4 px-1" aria-label="Select login type">
   <p class="text-center">Login as a</p>
@@ -13,7 +13,7 @@
         size="medium"
         (click)="role = 'Vendor'"
       >
-        Vender
+        Vendor
       </button>
     </div>
     <div class="col-lg-4 px-1">
@@ -41,6 +41,10 @@
       </button>
     </div>
   </div>
+  <div class="my-3">
+    <p class="sub-title"><b>You are about to Login as a {{ role }}</b></p>
+  </div>
+
 </section>
 
 <nb-alert

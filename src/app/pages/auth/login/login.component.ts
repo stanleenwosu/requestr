@@ -7,7 +7,7 @@ import { NbLoginComponent } from "@nebular/auth";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent extends NbLoginComponent implements OnInit {
-  role:string = "User"
+  role:string = "Staff"
   ngOnInit(): void { }
 }
 

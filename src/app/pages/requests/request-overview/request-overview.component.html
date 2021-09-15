@@ -1,0 +1,42 @@
+<section>
+  <nb-card>
+    <nb-card-header>Request Overview</nb-card-header>
+    <nb-card-body>
+      <div>
+        <div class="flex">
+          <div>
+            <button nbButton outline status="primary" [routerLink]="['/requests/make-request']">
+              <nb-icon icon="plus-outline"></nb-icon> Make Request
+            </button>
+          </div>
+          <div>
+            <button nbButton outline status="primary" [routerLink]="['/requests/all']">
+              <nb-icon icon="eye-outline"></nb-icon>
+              View All Requests
+            </button>
+          </div>
+          <div>
+            <button nbButton outline status="primary" [routerLink]="['/requests/all']">
+              <nb-icon icon="bar-chart-2-outline"></nb-icon>
+              View Reports
+            </button>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</section>
+
+<section>
+  <nb-card>
+    <nb-card-header>Latest Requests</nb-card-header>
+    <nb-card-body>
+      <cmp-requests></cmp-requests>
+      <div class="text-center mt-2">
+        <button nbButton status="primary" size="small" [routerLink]="['/requests/all']">
+          View All Requests
+        </button>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</section>

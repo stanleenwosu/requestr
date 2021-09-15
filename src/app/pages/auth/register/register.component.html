@@ -17,7 +17,7 @@
 <form (ngSubmit)="register()" #form="ngForm" aria-labelledby="title">
 
   <div class="form-control-group">
-    <label class="label" for="input-name">Full name:</label>
+    <label class="label" for="input-name">Full name or Company Name:</label>
     <input nbInput [(ngModel)]="user.name" #fullName="ngModel" id="input-name" name="fullName"
       placeholder="Full name" autofocus fullWidth fieldSize="large"
       [status]="fullName.dirty ? (fullName.invalid  ? 'danger' : 'success') : 'basic'"
@@ -95,11 +95,10 @@
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="select-role">Select Role</label>
+    <label class="label" for="select-role">Select Account Type</label>
     <nb-select fullWidth [(selected)]="user.role">
       <nb-option value="vendor">Vendor</nb-option>
       <nb-option value="staff">Staff</nb-option>
-      <nb-option value="admin">Admin</nb-option>
     </nb-select>
   </div>
 
