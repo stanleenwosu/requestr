@@ -1,47 +1,94 @@
 <nb-card [nbSpinner]="!order">
   <nb-card-header>
-    <h4>{{ order.id }}</h4>
+    <label
+      >Purchase Order ID: <b>{{ order?.id }}</b></label
+    >
+    <ng-container *ngIf="vendorBid">
+      <br />
+      <span class="text-danger mr-2"
+        >You have Already Placed a Bid for this Order</span
+      >
+      <button nbButton size="small" status="default">View</button>
+    </ng-container>
   </nb-card-header>
   <nb-card-body>
     <div class="my-2">
-      <label>Items needed:</label>
+      <label class="label">Items needed:</label>
       <nb-list>
         <nb-list-item>
           <div class="row w-100">
-            <div class="col-md-4"><label class="text-muted">Name</label></div>
-            <div class="col-md-2"><label class="text-muted">Price</label></div>
-            <div class="col-md-3"><label class="text-muted">Quantity</label></div>
-            <div class="col-md-3"><label class="text-muted">Total</label></div>
+            <div class="col-md-4"><label class="label">Name</label></div>
+            <div class="col-md-2"><label class="label">Price</label></div>
+            <div class="col-md-3"><label class="label">Quantity</label></div>
+            <div class="col-md-3"><label class="label">Total</label></div>
           </div>
         </nb-list-item>
-        <nb-list-item *ngFor="let item of rfo.items">
+        <nb-list-item *ngFor="let item of rfo?.items">
           <div class="row w-100">
-            <div class="col-md-4"><label>{{ item.name }}</label></div>
-            <div class="col-md-2"><label>{{ item.amount }}</label></div>
-            <div class="col-md-3"><label>{{ item.quantity }}</label></div>
-            <div class="col-md-3"><label>{{ item.total }}</label></div>
+            <div class="col-md-4">
+              <label>{{ item?.name }}</label>
+            </div>
+            <div class="col-md-2">
+              <label>{{ item?.amount }}</label>
+            </div>
+            <div class="col-md-3">
+              <label>{{ item?.quantity }}</label>
+            </div>
+            <div class="col-md-3">
+              <label>{{ item?.total }}</label>
+            </div>
           </div>
         </nb-list-item>
       </nb-list>
     </div>
     <div class="my-2">
+      <label class="label">Other Information</label>
       <nb-list>
         <nb-list-item>
           Comment: <b>{{ rfo?.comment }}</b>
         </nb-list-item>
         <nb-list-item>
-          Attachment: <a *ngIf="rfo?.attachment" [href]="rfo?.attachment" target="_blank">
-            Click to Download"
-          </a>
-          <span *ngIf="!rfo?.attachment"> None</span>
+          Attachment:
+          <b
+            ><a
+              *ngIf="rfo?.attachment"
+              [href]="rfo?.attachment"
+              target="_blank"
+            >
+              Click to Download
+            </a></b
+          >
+          <span *ngIf="!rfo?.attachment"> <b>None</b></span>
         </nb-list-item>
-        <nb-list>
-          No of Bids: <b>{{ order?.bids?.length }}</b>
-        </nb-list>
+        <nb-list-item>
+          No of Bids: <b>{{ bids?.length || 0 }}</b>
+        </nb-list-item>
       </nb-list>
     </div>
   </nb-card-body>
-  <nb-card-footer *ngIf="userS.UserInfo?.role == role.VENDOR && !rfo?.resolved">
-    <button class="mx-1" nbButton status="success" size="large" (click)="approve()">PLACE BID</button>
+  <nb-card-footer>
+    <ng-container *ngIf="userS.UserInfo?.role == role.VENDOR && !vendorBid">
+      <button
+        class="mx-1"
+        nbButton
+        status="success"
+        size="large"
+        (click)="bid()"
+      >
+        Place Bid
+      </button>
+    </ng-container>
+    <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN">
+      <button
+        class="mx-1"
+        nbButton
+        status="primary"
+        size="large"
+        [routerLink]="['/orders/' + order?.id + '/bids']"
+        [queryParams]="{ orderId: order?.id }"
+      >
+        See Bids
+      </button>
+    </ng-container>
   </nb-card-footer>
 </nb-card>

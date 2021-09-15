@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'app/@core/data/users';
+import { VendorService } from 'app/services/vendor.service';
 
 @Component({
   selector: 'suppliers',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SuppliersComponent implements OnInit {
 
-  constructor() { }
+  vendors: User[] = []
+  constructor(
+    private vendorS: VendorService
+  ) { }
 
   ngOnInit(): void {
+    this.init()
   }
 
+  async init () {
+    this.vendors = await this.vendorS.getVendors()
+  }
 }

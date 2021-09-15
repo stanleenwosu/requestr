@@ -15,11 +15,20 @@ const nb = [
   declarations: [ViewOrderComponent],
   imports: [
     CommonModule,
+
     RouterModule.forChild([
       {
-        path:'',
-        component:ViewOrderComponent,
-        pathMatch:'full'
+        path: '',
+        component: ViewOrderComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'bids',
+        loadChildren: () => import('../bids/bids.module').then(m => m.BidsModule)
+      },
+      {
+        path: 'bids/:id',
+        loadChildren: () => import('../view-bid/view-bid.module').then(m => m.ViewBidModule)
       }
     ]),
     ...nb

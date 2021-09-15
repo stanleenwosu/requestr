@@ -9,14 +9,14 @@
           <div class="row">
             <div class="col-12">
               <div class="input-group">
-                <label for="name">Enter Title of Request</label>
+                <label class="label" for="name">Enter Title of Request</label>
                 <input nbInput fullWidth fieldSize="medium" type="text" name="name" class="form-control"
                   formControlName="name" />
               </div>
 
 
               <div class="items mt-3" formArrayName="items">
-                <label>Enter Items</label>
+                <label class="label">Enter Items</label>
                 <div class="item py-2" *ngFor="let item of items().controls; let i = index" [formGroupName]='i'>
                   <div class="name"><input nbInput fullWidth type="text" formControlName="name"
                       placeholder="Item Description" class="form-control" /></div>
@@ -26,7 +26,9 @@
                       placeholder="Qty" class="form-control" /></div>
                   <div class="total"><input nbInput fullWidth type="text" formControlName="total" placeholder="Total"
                       class="form-control" /></div>
-                  <div><button type="button" nbButton size="small" status="danger" (click)="removeItem(i)">Remove</button></div>
+                  <div><button type="button" nbButton size="small" status="danger" (click)="removeItem(i)">
+                      <nb-icon icon="close-outline"></nb-icon>Remove
+                    </button></div>
                 </div>
                 <div class="mt-2">
                   <button type="button" nbButton size="small" status="primary" (click)="addItem()">
@@ -36,12 +38,12 @@
               </div>
 
               <div class="mt-3">
-                <label for="calender">Select Deadline (If available)</label>
+                <label class="label" for="calender">Select Deadline (If available)</label>
                 <nb-calendar size="medium" (dateChange)="handleDateChange($event)"></nb-calendar>
               </div>
 
               <div class="input-group">
-                <label for="detail">Additional Information</label>
+                <label class="label" for="detail">Additional Information</label>
                 <textarea nbInput fullWidth name="detail" formControlName="detail" class="form-control"></textarea>
               </div>
 
@@ -54,7 +56,7 @@
               </div>
  -->
               <div class="mt-3">
-                <label>Upload Attachment</label>
+                <label class="label">Upload Attachment</label>
                 <div class="card my-3 bg-gray">
                   <label class="card-header text-secondary">Upload Files</label>
                   <div class="card-body">

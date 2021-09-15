@@ -1,0 +1,48 @@
+<div class="box">
+  <nb-card>
+    <nb-card-header>
+      <label>Place your Bid for this Order</label>
+    </nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="form" (ngSubmit)="uploadToDB()">
+        <div class="row">
+          <div class="input-group">
+            <label class="label" for="name">Enter Bid Details</label>
+            <input nbInput fullWidth fieldSize="medium" type="text" name="name" class="form-control"
+              formControlName="details" />
+          </div>
+          <div class="input-group">
+            <label class="label" for="name">Enter Amount</label>
+            <input nbInput fullWidth fieldSize="medium" type="text" name="name" class="form-control"
+              formControlName="amount" />
+          </div>
+          <div class="input-group">
+            <label class="label">Upload Attachment</label>
+            <div class="card my-3 bg-gray">
+              <label class="card-header text-secondary">Upload Files</label>
+              <div class="">
+                <div class="col-12 p-5 text-center add-file">
+                  <input #file class="file_upload" id="file" type="file" (change)="upload(file.files)" />
+                  <div *ngIf="!fileInfo; else fileExist">
+                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                    <p class="text-secondary">Click to add a file</p>
+                  </div>
+                  <ng-template #fileExist>
+                    <div class="text-center">
+                      <h4 class="text-secondary">{{ fileInfo?.name }}</h4>
+                      <p class="text-secondary">{{ fileInfo?.size / 1024 | number }}kb</p>
+                    </div>
+                  </ng-template>
+                  <p class="text-danger" *ngIf="msgDisplay.type">* {{ msgDisplay?.msg }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button nbButton size="large" status="primary" fullWidth>Confirm Bid</button>
+
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

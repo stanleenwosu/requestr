@@ -15,6 +15,7 @@ import { UserService } from 'app/services/user.service';
 })
 export class ViewRequestComponent implements OnInit {
   rfo: RFO = null
+  rfoS = RFO_Status
   role = UserRoles
   constructor(
     private route: ActivatedRoute,

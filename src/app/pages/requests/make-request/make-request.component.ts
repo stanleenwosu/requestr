@@ -108,8 +108,13 @@ export class MakeRequestComponent implements OnInit {
   }
 
   upload(files) {
+    //clear all  the shit first
     this.fileInfo = null
     this.filesToUpload = null
+    this.msgDisplay = {
+      type: '',
+      msg: ''
+    }
     try {
       if (files.length === 0)
         return;
@@ -122,10 +127,13 @@ export class MakeRequestComponent implements OnInit {
       }
       var reader = new FileReader();
       this.fileInfo = files[0];
+
       reader.readAsDataURL(files[0]);
       reader.onload = (_event) => {
         const fileUrl = reader.result;
+        console.log(reader.result)
         this.filesToUpload = fileUrl
+        console.log(this.filesToUpload)
       }
       reader.onerror = (_ev) => {
         throw new Error("An Error Occured");

@@ -2,7 +2,7 @@
   <nb-card-header>
     <h4>{{ rfo?.name }}</h4>
     <button *ngIf="
-        userS.UserInfo?.id === rfo?.createdBy && !rfo?.resolved
+        userS.UserInfo?.id === rfo?.createdBy && !rfo?.resolved && rfo.status === rfoS.PENDING
       " class="mx-2" nbButton status="danger" size="madium" (click)="cancel()">
       Cancel RFO
     </button>
@@ -13,18 +13,18 @@
       <nb-list>
         <nb-list-item>
           <div class="row w-100">
-            <div class="col-md-4"><label class="text-muted">Name</label></div>
-            <div class="col-md-2"><label class="text-muted">Price</label></div>
-            <div class="col-md-3"><label class="text-muted">Quantity</label></div>
-            <div class="col-md-3"><label class="text-muted">Total</label></div>
+            <div class="col-md-4"><label class="label">Name</label></div>
+            <div class="col-md-2"><label class="label">Price</label></div>
+            <div class="col-md-3"><label class="label">Quantity</label></div>
+            <div class="col-md-3"><label class="label">Total</label></div>
           </div>
         </nb-list-item>
-        <nb-list-item *ngFor="let item of rfo.items">
+        <nb-list-item *ngFor="let item of rfo?.items">
           <div class="row w-100">
-            <div class="col-md-4"><label>{{ item.name }}</label></div>
-            <div class="col-md-2"><label>{{ item.amount }}</label></div>
-            <div class="col-md-3"><label>{{ item.quantity }}</label></div>
-            <div class="col-md-3"><label>{{ item.total }}</label></div>
+            <div class="col-md-4"><label>{{ item?.name }}</label></div>
+            <div class="col-md-2"><label>{{ item?.amount }}</label></div>
+            <div class="col-md-3"><label>{{ item?.quantity }}</label></div>
+            <div class="col-md-3"><label>{{ item?.total }}</label></div>
           </div>
         </nb-list-item>
       </nb-list>
@@ -51,7 +51,7 @@
         </nb-list-item>
         <nb-list-item>
           Attachment: <a *ngIf="rfo?.attachment" [href]="rfo?.attachment" target="_blank">
-            Click to Download"
+            <b>Click to Download </b>
           </a>
           <span *ngIf="!rfo?.attachment"> None</span>
         </nb-list-item>

@@ -7,40 +7,35 @@
         </nb-card-header>
         <nb-card-body>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="input-group">
-                <label for="name">Employee Name</label>
+                <label class="label"  for="name">Employee Name</label>
                 <input nbInput fullWidth fieldSize="medium" type="text" name="name" class="form-control"
                   formControlName="name" />
               </div>
+            </div>
+            <div class="col-md-4">
               <div class="input-group">
-                <label for="email">Email Address</label>
+                <label class="label"  for="email">Email Address</label>
                 <input nbInput fullWidth fieldSize="medium" type="email" name="email" class="form-control"
                   formControlName="email" />
               </div>
-              <div class="form-control-group">
+            </div>
+            <div class="col-md-4">
+              <div class="input-group">
                 <label class="label" for="select-role">Select Role</label>
                 <nb-select fullWidth formControlName="role">
                   <nb-option value="staff">Staff</nb-option>
                   <nb-option value="admin">Admin</nb-option>
                 </nb-select>
               </div>
-              <div class="mt-2">
-                <label for="password">Password</label>
-                <nb-form-field>
-                  <input nbInput fullWidth type="password" name="name" formControlName="password" />
-                  <button nbSuffix nbButton ghost type="button" (click)="generatePassword()">
-                    <nb-icon [icon]="'settings-2-outline'" pack="eva" [attr.aria-label]="'generate password'">
-                    </nb-icon>
-                  </button>
-                </nb-form-field>
-              </div>
-
-              <div class="mt-3">
-                <button type="submit" nbButton fullWidth status="primary">
-                  Add User
-                </button>
-              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mt-3">
+              <button type="submit" nbButton fullWidth status="primary">
+                Add Employee
+              </button>
             </div>
           </div>
         </nb-card-body>

@@ -105,4 +105,6 @@ export class FirebaseService {
       .doc(docId)
       .update(data);
   }
+
+  async
 }

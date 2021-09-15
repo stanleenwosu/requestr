@@ -16,6 +16,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,8 @@ import {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),

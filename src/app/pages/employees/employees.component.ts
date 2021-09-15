@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NbGlobalPhysicalPosition, NbToastrService } from "@nebular/theme";
 import { User } from "app/@core/data/users";
+import { AppService } from 'app/services/app.service';
 import { UserService } from 'app/services/user.service';
 @Component({
   selector: 'employees',
@@ -16,7 +17,8 @@ export class EmployeesComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userS: UserService,
-    private toastr: NbToastrService
+    private toastr: NbToastrService,
+    private appS: AppService
   ) { }
 
   ngOnInit(): void {
@@ -24,7 +26,6 @@ export class EmployeesComponent implements OnInit {
       name: [""],
       email: ["", [Validators.required, Validators.email]],
       role: ["", Validators.required],
-      password: ["", Validators.required],
     });
     this.init()
   }
@@ -35,13 +36,13 @@ export class EmployeesComponent implements OnInit {
   }
   submit() {
     const d = Date.now();
-    const { name, email, password } = this.form.value;
+    const { name, email } = this.form.value;
     try {
       const user: User = {
         id: "user_" + d,
         name: name,
         email: email,
-        password: password,
+        password: this.appS.generatePassword(),
         timestamp: d,
       };
       this.userS.addUser(user);

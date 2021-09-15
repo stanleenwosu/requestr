@@ -21,9 +21,10 @@ export enum PurchaseOrderStatus {
 export interface Bid {
   id: string,
   vendorId: string;
-  rfoId: string;
-  comment: string;
-  attachment: string;
+  orderId: string;
+  details: string;
+  amount?:string;
+  attachment?: string;
   createdOn: number;
   timestamp: number;
 }

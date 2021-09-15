@@ -70,7 +70,7 @@ export const MENU_ITEMS: AppMenu[] = [
     icon: 'people-outline',
     link: '/departments',
     home: true,
-    role: [UserRoles.ADMIN, UserRoles.SUPER, UserRoles.STAFF]
+    role: [UserRoles.ADMIN, UserRoles.SUPER]
   },
   {
     title: 'Employees',

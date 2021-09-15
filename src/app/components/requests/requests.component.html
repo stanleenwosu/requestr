@@ -1,4 +1,13 @@
 <nb-list [nbSpinner]="">
+  <nb-list-item>
+    <div class="row w-100">
+      <div class="col-lg-4"><label class="label">Title</label></div>
+      <div class="col-lg-2"><label class="label">Created By</label></div>
+      <div class="col-lg-3"><label class="label">Created On</label></div>
+      <div class="col-lg-1"><label class="label"></label></div>
+      <div class="col-lg-2"><label class="label">Status</label></div>
+    </div>
+  </nb-list-item>
   <nb-list-item class="col-12 list-item" *ngFor="let r of requestsInView" [ngClass]="{
       brCompleted: r.status == rs.APPROVED,
       brInprogress: r.status == rs.PENDING,
@@ -7,17 +16,17 @@
     <div class="list-item-inner">
       <div class="row">
         <div class="col-lg-4">
-          <label>{{ r.name }}</label>
+          <label>{{ r?.name }}</label>
         </div>
         <div class="col-2">
-          <span class="fs"><i class="fa fa-user mr-1" aria-hidden="true"></i>{{ r.createdBy | getName | async}}</span>
+          <span class="fs"><i class="fa fa-user mr-1" aria-hidden="true"></i>{{ r?.createdBy | getName | async}}</span>
         </div>
         <div class="col-3">
-          <span class="fs">{{ r.createdOn | date }}</span>
+          <span class="fs">{{ r?.createdOn | date }}</span>
         </div>
         <div class="col-1">
           <span *ngIf="
-            todayDate > r.deadline &&
+            todayDate > r?.deadline &&
             r.status == rs.PENDING
           " class="text-danger">
             <nb-icon icon="clock-outline"></nb-icon>

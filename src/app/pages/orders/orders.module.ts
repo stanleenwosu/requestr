@@ -13,12 +13,12 @@ import { ComponentsModule } from 'app/components/components.module';
     CommonModule,
     RouterModule.forChild([
       {
-        path:'',
-        component:OrdersComponent
+        path: '',
+        component: OrdersComponent
       },
       {
-        path:':id',
-        loadChildren: () => import ('./view-order/view-order.module').then(m => m.ViewOrderModule)
+        path: ':id',
+        loadChildren: () => import('./view-order/view-order.module').then(m => m.ViewOrderModule)
       }
     ]),
     NbCardModule,
