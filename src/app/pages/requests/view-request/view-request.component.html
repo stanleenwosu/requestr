@@ -8,7 +8,28 @@
     </button>
   </nb-card-header>
   <nb-card-body>
-    <div>
+    <div class="my-2">
+      <label>Items being requested for:</label>
+      <nb-list>
+        <nb-list-item>
+          <div class="row w-100">
+            <div class="col-md-4"><label class="text-muted">Name</label></div>
+            <div class="col-md-2"><label class="text-muted">Price</label></div>
+            <div class="col-md-3"><label class="text-muted">Quantity</label></div>
+            <div class="col-md-3"><label class="text-muted">Total</label></div>
+          </div>
+        </nb-list-item>
+        <nb-list-item *ngFor="let item of rfo.items">
+          <div class="row w-100">
+            <div class="col-md-4"><label>{{ item.name }}</label></div>
+            <div class="col-md-2"><label>{{ item.amount }}</label></div>
+            <div class="col-md-3"><label>{{ item.quantity }}</label></div>
+            <div class="col-md-3"><label>{{ item.total }}</label></div>
+          </div>
+        </nb-list-item>
+      </nb-list>
+    </div>
+    <div class="my-2">
       <nb-list>
         <nb-list-item>
           Created By: <b>{{ rfo?.createdBy | getName | async }}</b>
