@@ -1,7 +1,11 @@
 import { NbMenuItem } from '@nebular/theme';
 import { UserRoles } from "./users";
 
-export const MENU_ITEMS: NbMenuItem[] = [
+export class AppMenu extends NbMenuItem {
+  role: UserRoles[]
+}
+
+export const MENU_ITEMS: AppMenu[] = [
   {
     title: 'Dashboard',
     icon: 'home-outline',
