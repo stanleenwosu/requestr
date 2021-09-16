@@ -25,6 +25,7 @@ export interface Bid {
   details: string;
   amount?:string;
   attachment?: string;
+  status?: 'PENDING' | 'APPROVED' | 'REJECTED'
   createdOn: number;
   timestamp: number;
 }

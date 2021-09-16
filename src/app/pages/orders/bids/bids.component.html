@@ -9,22 +9,28 @@
           <div class="col-md-3">
             <label class="label">ID</label>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label class="label">Vendor</label>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <label class="label">Bidded On</label>
+          </div>
+          <div class="col-md-2">
+            <label class="label">Status</label>
           </div>
         </div>
         <div class="row py-2 item" *ngFor="let bid of bids">
           <div class="col-md-3">
             <p>{{ bid?.id }}</p>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <p>{{ bid?.vendorId | getName | async }}</p>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <p>{{ bid?.createdOn | date}}</p>
+          </div>
+          <div class="col-md-2">
+            <p>{{ bid?.status}}</p>
           </div>
           <div class="col-md-2">
             <button (click)="view(bid?.id)" nbButton size="small" status="primary">View</button>

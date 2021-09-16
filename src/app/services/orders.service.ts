@@ -37,6 +37,13 @@ export class OrdersService {
     return this.fireS.addDoc(this.bidColPath, bid)
   }
 
+  updateBid(bid: Bid) {
+    return this.fireS.updateDoc(this.bidColPath, bid.id, bid)
+  }
+  async getBid(bidId: string) {
+    return (await this.fireS.getDoc(this.bidColPath, bidId)) as Bid
+  }
+
 
   async getBidsByOrderId(orderId: string) {
     const res = await firebase.firestore().collection('bids').where('orderId', '==', orderId).get()

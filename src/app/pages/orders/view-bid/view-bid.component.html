@@ -1,1 +1,46 @@
-<p>view-bid works!</p>
+<nb-card [nbSpinner]="!bid">
+  <nb-card-header>
+    <h6>{{ bid?.id }}</h6>
+    <button *ngIf="
+        userS.UserInfo?.id === bid?.vendorId && bid?.status == 'PENDING'
+      " class="mx-2" nbButton status="danger" size="small" (click)="cancel()">
+      Cancel Bid
+    </button>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="my-2">
+      <nb-list>
+        <nb-list-item>
+          Vendor Name: <b>{{ bid?.vendorId| getName | async }}</b>
+        </nb-list-item>
+        <nb-list-item>
+          Bidded on: <b>{{ bid?.createdOn | date }}</b></nb-list-item>
+        <nb-list-item>
+          Status: <b>{{ bid?.status | uppercase }}</b>
+        </nb-list-item>
+        <nb-list-item>
+          Details: <b>{{ bid?.details }}</b>
+        </nb-list-item>
+        <nb-list-item>
+          Attachment: <a *ngIf="bid?.attachment" [href]="bid?.attachment" target="_blank">
+            <b>Click to Download </b>
+          </a>
+          <span *ngIf="!bid?.attachment"> None</span>
+        </nb-list-item>
+      </nb-list>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN && bid?.status == 'PENDING'">
+      <button class="mx-1" nbButton status="success" size="medium" (click)="approve()">Accept Bid</button>
+      <button class="mx-1" nbButton status="danger" size="medium" (click)="reject()">Reject Bid</button>
+    </ng-container>
+
+    <!--   <ng-container *ngIf="userS.UserInfo?.role == role.VENDOR && userS.UserInfo?.id === bid?.vendorId">
+      <button class="mx-1" nbButton status="success" size="medium" (click)="confirm()">Accept Bid</button>
+      <button class="mx-1" nbButton status="danger" size="medium" (click)="confirm()">Reject Bid</button>
+    </ng-container> -->
+
+    <!--  <button class="mx-1" nbButton status="primary" size="medium" (click)="viewRFO()">View Request</button> -->
+  </nb-card-footer>
+</nb-card>
