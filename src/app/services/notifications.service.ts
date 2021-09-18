@@ -9,7 +9,7 @@ import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationsService {
+export class  NotificationsService {
 
   private notifications: AppNotification[] = []
   db = firebase.database()

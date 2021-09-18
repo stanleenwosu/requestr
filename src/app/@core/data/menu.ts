@@ -81,6 +81,13 @@ export const MENU_ITEMS: AppMenu[] = [
     role: [UserRoles.ADMIN, UserRoles.SUPER]
   },
   {
+    title: 'Procurement Team',
+    icon: 'people-outline',
+    link: '/procurements',
+    home: true,
+    role: [UserRoles.SUPER]
+  },
+  {
     title: 'Employees',
     icon: 'people-outline',
     link: '/employees',

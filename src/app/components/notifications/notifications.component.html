@@ -5,13 +5,15 @@
   <nb-card-body>
     <nb-list>
       <nb-list-item *ngFor="let not of notifications">
-        <div>
-          <span class="py-0">
-            <label class="n-title"><b>{{not?.title}}</b></label>
-            <label class="label float-right">{{not?.timestamp | date }}</label>
-          </span>
-          <label class="n-message block">{{not?.message}}</label>
-          <a class="d-block n-route" [routerLink]="[not?.route]">View</a>
+        <div class="w-100">
+          <div class="py-0 n-header">
+            <p class="n-title"><b>{{not?.title}}</b></p>
+            <p class="label">{{not?.timestamp | date }}</p>
+          </div>
+          <div>
+            <label class="n-message block">{{not?.message}}</label>
+            <a class="d-block n-route" (click)="view(not?.payload?.route)">View</a>
+          </div>
         </div>
       </nb-list-item>
     </nb-list>

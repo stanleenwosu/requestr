@@ -1,0 +1,43 @@
+<section>
+  <div>
+    <nb-card>
+      <nb-card-header>
+        <label class="label">Available Staffs</label>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-list>
+          <nb-list-item *ngFor="let user of staffs">
+            <div class="w-100">
+              <nb-user size="small" [name]="user.name" [title]="user.role">
+              </nb-user>
+              <br />
+              <button nbButton size="tiny" statis="primary">Add to Procurement Team</button>
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</section>
+
+<section>
+  <div>
+    <nb-card>
+      <nb-card-header>
+        <label class="label">Team Members</label>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-list>
+          <nb-list-item *ngFor="let user of team">
+            <div class="w-100">
+              <nb-user size="small" [name]="user?.name" [title]="user?.role">
+              </nb-user>
+              <br />
+              <button nbButton size="tiny" statis="danger">Remove</button>
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</section>

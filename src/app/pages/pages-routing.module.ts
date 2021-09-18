@@ -77,6 +77,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: "procurements",
+        loadChildren: () =>
+          import("./procurement/procurement.module").then(
+            (m) => m.ProcurementModule
+          ),
+      },
+      {
         path: "employees",
         loadChildren: () =>
           import("./employees/employees.module").then((m) => m.EmployeesModule),
@@ -105,4 +112,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }

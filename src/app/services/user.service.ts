@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'app/@core/data/users';
+import { User, UserRoles } from 'app/@core/data/users';
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -70,6 +70,11 @@ export class UserService {
       .limitToLast(limit)
       .get();
     return res.docs.map((r) => r.data() as User);
+  }
+
+  async getStaffs() {
+    const res = await this.uDB.where('role', '==', UserRoles.STAFF).get();
+    return (await res.docs.map(r => r.data())) as User[]
   }
 
 }

@@ -6,17 +6,21 @@
   display: block;
   text-decoration: underline;
 }
+.n-header {
+  display: flex;
+  justify-content: space-between;
+}
 
 .n-title {
-  font-size: .5rem
+  font-size: 0.8rem;
 }
 
 .n-message {
-  font-size: .3rem;
+  font-size: 0.7rem;
 }
 
-.n-route{
+.n-route {
   cursor: pointer;
   text-decoration: underline;
-  font-size: .3rem;
+  font-size: 0.7rem;
 }

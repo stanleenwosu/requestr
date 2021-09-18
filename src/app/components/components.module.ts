@@ -11,6 +11,7 @@ import { CalenderComponent } from './calender/calender.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { RouterModule } from '@angular/router';
 
 const components = [
   RequestsComponent,
@@ -35,6 +36,7 @@ const components = [
     NbInputModule,
     NbButtonModule,
     PipesModule,
+    RouterModule,
     NbButtonModule
   ],
   exports: [components]
