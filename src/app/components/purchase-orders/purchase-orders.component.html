@@ -3,15 +3,17 @@
     <label class="ml1 label">Id</label>
   </div>
   <div class="col-md-3">
-    <label class="ml1 label"> Order By</label>
+    <label class="ml1 label"> Ordered By</label>
   </div>
   <div class="col-md-3">
+    <label class="ml1 label"> Approved By</label>
+  </div>
+  <div class="col-md-2">
     <label class="label">Created On</label>
   </div>
   <div class="col-md-2">
     <label class="label">Status</label>
   </div>
-  <div class="col-md-2"></div>
 </div>
 
 <nb-list [nbSpinner]="loadingOrders">
@@ -30,6 +32,9 @@
           <span class="fs">{{ o.createdBy | getName | async }}</span>
         </div>
         <div class="col-md-3">
+          <span class="fs">{{ o.approvedBy | getName | async }}</span>
+        </div>
+        <div class="col-md-2">
           <span class="fs">{{ o.createdOn | date }}</span>
         </div>
         <div class="col-md-2">
@@ -43,9 +48,9 @@
           </div>
         </div>
         <div class="col-md-2">
-          <button type="button" nbButton size="small" status="default">
+        <!--   <button type="button" nbButton size="small" status="default">
             Place Bid
-          </button>
+          </button> -->
         </div>
       </div>
     </div>

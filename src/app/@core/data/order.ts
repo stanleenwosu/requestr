@@ -5,6 +5,7 @@ export interface PurchaseOrder {
   rfoId: string
   createdOn: number
   createdBy: string
+  approvedBy:string
   bids: string[]
   status: PurchaseOrderStatus
   timestamp: number
@@ -23,9 +24,24 @@ export interface Bid {
   vendorId: string;
   orderId: string;
   details: string;
-  amount?:string;
+  amount?: string;
   attachment?: string;
-  status?: 'PENDING' | 'APPROVED' | 'REJECTED'
+  status?: IStatus;
   createdOn: number;
   timestamp: number;
+  staffDecision?: IDecision;
+  adminDecision?: IDecision;
+  superDecision?: IDecision;
+}
+
+export interface IDecision {
+  userId: string;
+  status: IStatus;
+  timestamp: number
+}
+
+export enum IStatus {
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED'
 }

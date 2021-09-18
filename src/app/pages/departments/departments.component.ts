@@ -57,6 +57,5 @@ export class DepartmentsComponent implements OnInit {
     } catch (error) {
       this.appS.showToast('danger', error)
     }
-
   }
 }

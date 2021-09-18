@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
-import { Bid } from 'app/@core/data/order';
+import { Bid, IDecision, IStatus, } from 'app/@core/data/order';
 import { UserRoles } from 'app/@core/data/users';
 import { ConfirmDialogComponent } from 'app/components/confirm-dialog/confirm-dialog.component';
 import { OrdersService } from 'app/services/orders.service';
@@ -16,6 +16,7 @@ export class ViewBidComponent implements OnInit {
 
   bid: Bid
   role = UserRoles
+  status = IStatus
   constructor(
     public userS: UserService,
     private orderS: OrdersService,
@@ -45,22 +46,50 @@ export class ViewBidComponent implements OnInit {
 
   }
 
-  async approve() {
+  async approve(role: UserRoles) {
     const res = await this.confirm("Are you sure you want to Approve Bid?")
-    console.log(res)
-    if (res) {
-      this.bid.status = 'APPROVED'
-      this.orderS.updateBid(this.bid)
+    if (!res) return
+    switch (role) {
+      case UserRoles.STAFF:
+        this.bid.staffDecision = this.userDecision(IStatus.APPROVED)
+        break;
+      case UserRoles.ADMIN:
+        this.bid.adminDecision = this.userDecision(IStatus.APPROVED)
+        break;
+      case UserRoles.SUPER:
+        this.bid.status = this.status.APPROVED
+        this.bid.superDecision = this.userDecision(IStatus.APPROVED)
+        break;
     }
+    this.orderS.updateBid(this.bid)
+
   }
 
-  async reject() {
+  async reject(role: UserRoles) {
     const res = await this.confirm("Are you sure you want to Reject Bid?")
-    console.log(res)
-    if (res) {
-      this.bid.status = 'REJECTED'
-      this.orderS.updateBid(this.bid)
+    if (!res) return
+    switch (role) {
+      case UserRoles.STAFF:
+        this.bid.staffDecision = this.userDecision(IStatus.REJECTED)
+        break;
+      case UserRoles.ADMIN:
+        this.bid.adminDecision = this.userDecision(IStatus.REJECTED)
+        break;
+      case UserRoles.SUPER:
+        this.bid.status = this.status.REJECTED
+        this.bid.superDecision = this.userDecision(IStatus.REJECTED)
+        break;
     }
+    this.orderS.updateBid(this.bid)
+  }
+
+  userDecision(status: IStatus): IDecision {
+    const decision: IDecision = {
+      userId: this.userS.UserInfo.id,
+      status: status,
+      timestamp: Date.now()
+    }
+    return decision
   }
 
   cancel() {

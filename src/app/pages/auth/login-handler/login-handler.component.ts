@@ -26,11 +26,12 @@ export class LoginHandlerComponent implements OnInit {
     this.type = history.state.type
     setTimeout(() => {
       if (this.type === 'login') {
-        this.login()
+        return this.login()
       }
       if (this.type === 'signup') {
-        this.signup()
+        return this.signup()
       }
+      this.router.navigate(['/'])
     }, 2000);
   }
 

@@ -17,7 +17,7 @@
           </nb-list-item>
           <nb-list-item *ngFor="let v of vendors">
             <div class="row w-100">
-              <div class="col-2"><label>{{ v?.id | slice:0:10 }}</label></div>
+              <div class="col-2"><label class="label">{{ v?.id }}</label></div>
               <div class="col-3"><label>{{ v?.name }}</label></div>
               <div class="col-3"><label>{{ v?.email }}</label></div>
               <div class="col-2"><label>{{ v?.createdOn }}</label></div>

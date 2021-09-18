@@ -3,8 +3,8 @@
     <div class="row w-100">
       <div class="col-lg-4"><label class="label">Title</label></div>
       <div class="col-lg-2"><label class="label">Created By</label></div>
-      <div class="col-lg-3"><label class="label">Created On</label></div>
-      <div class="col-lg-1"><label class="label"></label></div>
+      <div class="col-lg-2"><label class="label">Created On</label></div>
+      <div class="col-lg-2"><label class="label">Type</label></div>
       <div class="col-lg-2"><label class="label">Status</label></div>
     </div>
   </nb-list-item>
@@ -21,16 +21,17 @@
         <div class="col-2">
           <span class="fs"><i class="fa fa-user mr-1" aria-hidden="true"></i>{{ r?.createdBy | getName | async}}</span>
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <span class="fs">{{ r?.createdOn | date }}</span>
         </div>
-        <div class="col-1">
-          <span *ngIf="
+        <div class="col-2">
+          <span class="fs">{{ r?.type | uppercase }}</span>
+          <!-- <span *ngIf="
             todayDate > r?.deadline &&
             r.status == rs.PENDING
           " class="text-danger">
             <nb-icon icon="clock-outline"></nb-icon>
-          </span>
+          </span> -->
         </div>
         <div class="col-2">
           <div class="font-weight-bold badge pj-badge" [ngClass]="{

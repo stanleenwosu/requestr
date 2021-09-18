@@ -1,3 +1,27 @@
+<ng-container *ngIf="userS?.UserInfo?.role === role.STAFF">
+  <nb-card>
+    <nb-card-header>Purchase Order Overview</nb-card-header>
+    <nb-card-body>
+      <div>
+        <div class="flex">
+          <div>
+            <button nbButton outline status="primary" [routerLink]="['/orders/add']">
+              <nb-icon icon="plus-outline"></nb-icon> Make Order
+            </button>
+          </div>
+          <div>
+            <button nbButton outline status="primary" [routerLink]="['/requests/all']">
+              <nb-icon icon="eye-outline"></nb-icon>
+              View All Orders
+            </button>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</ng-container>
+
+
 <section>
   <nb-card>
     <nb-card-header>

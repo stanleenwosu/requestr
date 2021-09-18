@@ -6,7 +6,7 @@ const routes = [
   {
     path: "",
     redirectTo: "overview",
-    pathMatch: 'full'
+    pathMatch: "full",
   },
   {
     path: "overview",
@@ -21,6 +21,9 @@ const routes = [
       import("./make-request/make-request.module").then(
         (m) => m.MakeRequestModule
       ),
+      data: {
+        type: 'request'
+      }
   },
   {
     path: "awaiting-requests",
@@ -43,13 +46,9 @@ const routes = [
         (m) => m.ViewRequestModule
       ),
   },
-
-]
+];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ]
+  imports: [CommonModule, RouterModule.forChild(routes)],
 })
-export class RequestsModule { }
+export class RequestsModule {}

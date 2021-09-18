@@ -12,6 +12,7 @@ export interface RFO {
   resolved?: boolean;
   resolvedOn?: number;
   active?:boolean;
+  type: 'REQUEST' | 'ORDER'
   attachment?: any;
   timestamp: number;
 }

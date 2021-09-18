@@ -9,7 +9,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
 };
 
 export const firebaseConfig = {
@@ -18,5 +18,7 @@ export const firebaseConfig = {
   projectId: "requestr-f4a36",
   storageBucket: "requestr-f4a36.appspot.com",
   messagingSenderId: "626948144605",
-  appId: "1:626948144605:web:c1ac2e6424902445beca34"
-}
+  appId: "1:626948144605:web:c1ac2e6424902445beca34",
+  databaseURL:
+    "https://requestr-f4a36-default-rtdb.europe-west1.firebasedatabase.app",
+};

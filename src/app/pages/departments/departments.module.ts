@@ -22,6 +22,10 @@ const nb = [
       {
         path: '',
         component: DepartmentsComponent
+      },
+      {
+        path: ':id',
+        loadChildren: () => import('./view-department/view-department.module').then(m => m.ViewDepartmentModule)
       }
     ]),
     ...nb

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NbCardModule } from '@nebular/theme';
+import { ComponentsModule } from 'app/components/components.module';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
@@ -9,6 +10,7 @@ import { DashboardComponent } from './dashboard.component';
   imports: [
     NbCardModule,
     ThemeModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

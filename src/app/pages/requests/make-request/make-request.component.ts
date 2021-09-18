@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { RFO, RFO_Status } from 'app/@core/data/model';
 import { User } from 'app/@core/data/users';
+import { NotificationsService } from 'app/services/notifications.service';
 import { RequestService } from 'app/services/request.service';
 import { UserService } from 'app/services/user.service';
 import firebase from 'firebase/app'
@@ -28,11 +30,14 @@ export class MakeRequestComponent implements OnInit {
     type: '',
     msg: ''
   }
+  type: 'REQUEST' | 'ORDER'
   constructor(
     private fb: FormBuilder,
     private userS: UserService,
     private reqS: RequestService,
-    private toastr: NbToastrService
+    private toastr: NbToastrService,
+    private route: ActivatedRoute,
+    private notS: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -48,16 +53,15 @@ export class MakeRequestComponent implements OnInit {
   }
 
   async init() {
-    /* this.users = await this.userS.getUsers()
-    this.users = this.users.filter(u => u.id !== this.userS.UserInfo.id) */
+    this.type = this.route.snapshot.data['type']
   }
 
   item() {
     return this.fb.group({
       name: ['', Validators.required],
-      quantity: ['', [Validators.required, Validators.min(0)]],
-      amount: ['', [Validators.required, Validators.min(0)]],
-      total: ['', [Validators.required, Validators.min(0)]]
+      quantity: ['', [Validators.min(0)]],
+      amount: ['', [Validators.min(0)]],
+      total: ['', [Validators.min(0)]]
     })
   }
 
@@ -77,7 +81,7 @@ export class MakeRequestComponent implements OnInit {
     const d = Date.now()
     const { name, detail, userId, deadline, items } = this.requestForm.value
     const request: RFO = {
-      id: 'req_' + d,
+      id: 'RFO' + d,
       name: name,
       detail: detail,
       items: items,
@@ -86,14 +90,16 @@ export class MakeRequestComponent implements OnInit {
       assignedTo: userId,
       status: RFO_Status.PENDING,
       active: true,
+      type: this.type,
       deadline: deadline,
       attachment: attachmentURL,
       timestamp: d
     }
     try {
+      await this.notS.addNotification(`New${this.type}`, '', this.userS.UserInfo.id, { type: <any>this.type })
       await this.reqS.addRFO(request);
       this.newRequest = request
-      this.toastr.success(`${request.id} added`, "New Request", {
+      this.toastr.success(`${request.id} added`, `NEW ${this.type}`, {
         duration: 4000,
         position: this.tp,
       });

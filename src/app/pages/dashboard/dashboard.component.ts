@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
   constructor(
-  ) { }
+
+  ) {
+    this.init()
+  }
+
+  init() {
+
+  }
 }

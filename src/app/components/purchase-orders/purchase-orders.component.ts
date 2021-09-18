@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PurchaseOrder, PurchaseOrderStatus } from 'app/@core/data/order';
+import { UserRoles } from 'app/@core/data/users';
 import { OrdersService } from 'app/services/orders.service';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'purchase-orders',
@@ -15,7 +17,9 @@ export class PurchaseOrdersComponent implements OnInit {
   ps = PurchaseOrderStatus
   constructor(
     private orderS: OrdersService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private userS: UserService
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +27,12 @@ export class PurchaseOrdersComponent implements OnInit {
   }
 
   async init() {
-    this.ordersInView = await this.orderS.getPurchaseOrders();
+    if (this.userS.UserInfo.role === UserRoles.STAFF) {
+      this.ordersInView = await this.orderS.getPurchaseOrdersByUserId(this.userS.UserInfo.id);
+    }
+    else {
+      this.ordersInView = await this.orderS.getPurchaseOrders();
+    }
     this.loadingOrders = false
   }
 

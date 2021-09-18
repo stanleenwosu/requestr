@@ -10,6 +10,7 @@ import { PlaceBidComponent } from './place-bid/place-bid.component';
 import { CalenderComponent } from './calender/calender.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const components = [
   RequestsComponent,
@@ -17,7 +18,8 @@ const components = [
   ApprovalsComponent,
   PurchaseOrdersComponent,
   PlaceBidComponent,
-  ConfirmDialogComponent
+  ConfirmDialogComponent,
+  NotificationsComponent
 ]
 
 @NgModule({

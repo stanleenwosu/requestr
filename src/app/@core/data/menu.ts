@@ -18,7 +18,7 @@ export const MENU_ITEMS: AppMenu[] = [
     icon: 'flag-outline',
     link: '/requests',
     home: true,
-    role: [UserRoles.SUPER, UserRoles.STAFF]
+    role: [UserRoles.STAFF, UserRoles.SUPER]
   },
   {
     title: 'Awaiting Requests',
@@ -32,8 +32,16 @@ export const MENU_ITEMS: AppMenu[] = [
     icon: 'shopping-bag-outline',
     link: '/orders',
     home: true,
-    role: [UserRoles.ADMIN, UserRoles.SUPER, UserRoles.VENDOR]
+    role: [UserRoles.ADMIN, UserRoles.STAFF, UserRoles.SUPER, UserRoles.VENDOR]
   },
+  {
+    title: 'Bids',
+    icon: 'shopping-bag-outline',
+    link: '/bids',
+    home: true,
+    role: [UserRoles.VENDOR]
+  },
+
   /* {
     title: 'Deliveries',
     icon: 'car-outline',

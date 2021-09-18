@@ -1,4 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from "@angular/router";
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -6,16 +6,19 @@ import {
   NbRegisterComponent,
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
-} from '@nebular/auth';
-import { NgModule } from '@angular/core';
-import { PagesComponent } from './pages.component';
-import { AuthGuard } from 'app/guards/auth.guard';
+} from "@nebular/auth";
+import { NgModule } from "@angular/core";
+import { PagesComponent } from "./pages.component";
+import { AuthGuard } from "app/guards/auth.guard";
+import { UserService } from "app/services/user.service";
+import { UserRoles } from "app/@core/data/users";
 
+let role;
 const routes: Routes = [
   {
     path: "",
-    redirectTo: 'auth',
-    pathMatch: "full"
+    redirectTo: "auth",
+    pathMatch: "full",
   },
   {
     path: "",
@@ -23,63 +26,84 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
+        path: "",
+        redirectTo: "dashboard",
+        pathMatch: "full",
       },
       {
-        path: 'dashboard',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+        path: "dashboard",
+        loadChildren: () =>
+          import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
       },
       {
-        path: 'requests',
-        loadChildren: () => import('./requests/requests.module').then(m => m.RequestsModule)
+        path: "requests",
+        loadChildren: () =>
+          import("./requests/requests.module").then((m) => m.RequestsModule),
       },
       {
-        path: 'orders',
-        loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+        path: "orders",
+        loadChildren: () =>
+          import("./orders/orders.module").then((m) => m.OrdersModule),
       },
       {
-        path: 'deliveries',
-        loadChildren: () => import('./deliveries/deliveries.module').then(m => m.DeliveriesModule)
+        path: "bids",
+        loadChildren: () =>
+          import("./orders/bids/bids.module").then((m) => m.BidsModule),
+        data: {
+          filter: "staff",
+        },
       },
       {
-        path: 'invoices',
-        loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesModule)
+        path: "deliveries",
+        loadChildren: () =>
+          import("./deliveries/deliveries.module").then(
+            (m) => m.DeliveriesModule
+          ),
       },
       {
-        path: 'suppliers',
-        loadChildren: () => import('./suppliers/suppliers.module').then(m => m.SuppliersModule)
+        path: "invoices",
+        loadChildren: () =>
+          import("./invoices/invoices.module").then((m) => m.InvoicesModule),
       },
       {
-        path: 'departments',
-        loadChildren: () => import('./departments/departments.module').then(m => m.DepartmentsModule)
+        path: "suppliers",
+        loadChildren: () =>
+          import("./suppliers/suppliers.module").then((m) => m.SuppliersModule),
       },
       {
-        path: 'employees',
-        loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule)
+        path: "departments",
+        loadChildren: () =>
+          import("./departments/departments.module").then(
+            (m) => m.DepartmentsModule
+          ),
       },
       {
-        path: 'payments',
-        loadChildren: () => import('./payments/payments.module').then(m => m.PaymentsModule)
+        path: "employees",
+        loadChildren: () =>
+          import("./employees/employees.module").then((m) => m.EmployeesModule),
       },
       {
-        path: 'users',
-        loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+        path: "payments",
+        loadChildren: () =>
+          import("./payments/payments.module").then((m) => m.PaymentsModule),
       },
-    ]
+      {
+        path: "users",
+        loadChildren: () =>
+          import("./users/users.module").then((m) => m.UsersModule),
+      },
+    ],
   },
   {
-    path: 'auth',
+    path: "auth",
     component: NbAuthComponent,
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule),
   },
-  { path: '**', redirectTo: 'auth' },
+  { path: "**", redirectTo: "auth" },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {
-}
+export class PagesRoutingModule {}

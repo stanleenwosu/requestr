@@ -50,7 +50,8 @@ export class ViewRequestComponent implements OnInit {
       bids: [],
       timestamp: d,
       createdOn: d,
-      createdBy: this.userS.UserInfo.id,
+      createdBy: this.rfo.createdBy,
+      approvedBy: this.userS.UserInfo.id,
       status: PurchaseOrderStatus.BIDDING
     }
 

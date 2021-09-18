@@ -1,4 +1,13 @@
 <nb-list [nbSpinner]="loadingApprovals">
+  <nb-list-item>
+    <div class="row w-100">
+      <div class="col-md-4"><label class="label">Title</label></div>
+      <div class="col-md-2"><label class="label">Created By</label></div>
+      <div class="col-md-2"><label class="label">Creted On</label></div>
+      <div class="col-md-2"><label class="label">Type</label></div>
+      <div class="col-md-2"><label class="label">Status</label></div>
+    </div>
+  </nb-list-item>
   <nb-list-item class="col-12 list-item" *ngFor="let r of approvalsInView" [ngClass]="{
       brCompleted: r.status == rs.APPROVED,
       brInprogress: r.status == rs.PENDING,
@@ -12,19 +21,12 @@
         <div class="col-2">
           <span class="fs"><i class="fa fa-user mr-1" aria-hidden="true"></i>{{ r.createdBy | getName | async}}</span>
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <span class="fs">{{ r.createdOn | date }}</span>
         </div>
-        <!-- <div class="col-1">
-        <span
-          *ngIf="
-            todayDate > appS.toTimeStamp(task.dateDue) &&
-            r.status == ts.in_progress
-          "
-          class="text-danger"
-          ><i class="fas fa-stopwatch"></i
-        ></span>
-        </div> -->
+        <div class="col-2">
+          <span class="fs">{{ r?.type | uppercase }}</span>
+        </div>
         <div class="col-2">
           <div class="font-weight-bold badge pj-badge" [ngClass]="{
               completed: r.status == rs.APPROVED,

@@ -2,7 +2,8 @@
   <div>
     <nb-card>
       <nb-card-header>
-        <label class="">All Bids for Purchase Order - {{ orderId }}</label>
+        <label *ngIf="filter === 'order'" class="">All Bids for Purchase Order - {{ orderId }}</label>
+        <label *ngIf="filter === 'vendor'" class="">All Your Bids</label>
       </nb-card-header>
       <nb-card-body>
         <div class="row mb-2 grey">

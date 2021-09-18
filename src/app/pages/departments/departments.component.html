@@ -3,7 +3,7 @@
     <div>
       <nb-card>
         <nb-card-header>
-          <label class="">Create a New Department</label>
+          <label class="label">Create a New Department</label>
         </nb-card-header>
         <nb-card-body>
           <div class="row">
@@ -39,7 +39,7 @@
   <div>
     <nb-card>
       <nb-card-header>
-        <label class="">All Departments</label>
+        <label class="label">All Departments</label>
       </nb-card-header>
       <nb-card-body>
         <div class="row mb-2 grey">
@@ -64,7 +64,7 @@
             <p>{{ dept.createdOn | date}}</p>
           </div>
           <div class="col-md-2">
-            <button (click)="delete(dept.id)" nbButton size="small" status="danger">Delete</button>
+            <button (click)="view(dept.id)" nbButton size="small" status="primary">View</button>
           </div>
         </div>
       </nb-card-body>

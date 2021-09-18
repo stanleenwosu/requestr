@@ -1,0 +1,19 @@
+<nb-card>
+  <nb-card-header>
+    <label class="label">Your Notifications</label>
+  </nb-card-header>
+  <nb-card-body>
+    <nb-list>
+      <nb-list-item *ngFor="let not of notifications">
+        <div>
+          <span class="py-0">
+            <label><b>{{not?.title}}</b></label>
+            <label class="label float-right">{{not?.timestamp | date }}</label>
+          </span>
+          <label class="block">{{not?.message}}</label>
+          <a class="d-block pointer" [routerLink]="[not?.route]">View</a>
+        </div>
+      </nb-list-item>
+    </nb-list>
+  </nb-card-body>
+</nb-card>

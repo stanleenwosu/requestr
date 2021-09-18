@@ -24,7 +24,10 @@ const nb = [
       },
       {
         path: 'bids',
-        loadChildren: () => import('../bids/bids.module').then(m => m.BidsModule)
+        loadChildren: () => import('../bids/bids.module').then(m => m.BidsModule),
+        data: {
+          filter: 'order'
+        }
       },
       {
         path: 'bids/:id',

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BidsComponent } from './bids.component';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 import { NbButtonModule, NbCardModule, NbInputModule, NbListModule } from '@nebular/theme';
 import { PipesModule } from 'app/pipes/pipes.module';
@@ -13,6 +13,8 @@ const nb = [
   NbInputModule
 ]
 
+let data = {}
+
 
 @NgModule({
   declarations: [BidsComponent],
@@ -22,7 +24,8 @@ const nb = [
     RouterModule.forChild([
       {
         path: '',
-        component: BidsComponent
+        component: BidsComponent,
+        data
       },
       {
         path: ':id',
@@ -32,4 +35,10 @@ const nb = [
     ...nb
   ]
 })
-export class BidsModule { }
+export class BidsModule {
+  constructor(
+    private route: ActivatedRoute
+  ) {
+    data = route.snapshot.data
+  }
+}
