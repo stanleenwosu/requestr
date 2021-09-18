@@ -56,4 +56,8 @@ export class ViewOrderComponent implements OnInit {
       });
   }
 
+  delete() {
+
+  }
+
 }

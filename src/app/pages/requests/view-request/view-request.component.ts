@@ -4,6 +4,7 @@ import { RFO_Status, RFO } from 'app/@core/data/model';
 import { PurchaseOrder, PurchaseOrderStatus } from 'app/@core/data/order';
 import { UserRoles } from 'app/@core/data/users';
 import { AppService } from 'app/services/app.service';
+import { NotificationsService } from 'app/services/notifications.service';
 import { OrdersService } from 'app/services/orders.service';
 import { RequestService } from 'app/services/request.service';
 import { UserService } from 'app/services/user.service';
@@ -23,7 +24,8 @@ export class ViewRequestComponent implements OnInit {
     public userS: UserService,
     private reqS: RequestService,
     private orderS: OrdersService,
-    private appS: AppService
+    private appS: AppService,
+    private notS: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +45,9 @@ export class ViewRequestComponent implements OnInit {
   async approve() {
     this.rfo.status = RFO_Status.APPROVED
     await this.reqS.updateRFO(this.rfo)
+    if (this.rfo.type == 'REQUEST') {
+      return;
+    }
     const d = Date.now()
     const newOrder: PurchaseOrder = {
       id: 'pco_' + d,
@@ -57,6 +62,7 @@ export class ViewRequestComponent implements OnInit {
 
     try {
       await this.orderS.createPurchaseOrder(newOrder)
+      await this.notS.addVendorNotification(newOrder.id)
       this.appS.showToast('success', 'A new Purchase Order has been Created', 'Purchase Order')
       this.router.navigate(['requests/awaiting-requests'])
 

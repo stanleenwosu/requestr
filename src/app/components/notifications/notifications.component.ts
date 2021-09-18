@@ -19,6 +19,6 @@ export class NotificationsComponent implements OnInit {
   }
 
   init() {
-    this.notifications = this.notS.UserNotifications
+    this.notifications = this.notS.UserNotifications.sort((a, b) => b.timestamp - a.timestamp)
   }
 }

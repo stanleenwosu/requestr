@@ -96,13 +96,15 @@ export class MakeRequestComponent implements OnInit {
       timestamp: d
     }
     try {
-      await this.notS.addNotification(`New${this.type}`, '', this.userS.UserInfo.id, { type: <any>this.type })
       await this.reqS.addRFO(request);
+      await this.notS.addNotification(`New${this.type}`, '', this.userS.UserInfo.id, { type: <any>this.type })
+      await this.notS.addStaffNotification(request.id)
       this.newRequest = request
-      this.toastr.success(`${request.id} added`, `NEW ${this.type}`, {
+      this.toastr.success(`${request.id} added`, `New ${this.type}`, {
         duration: 4000,
         position: this.tp,
       });
+      this.requestForm.reset()
     } catch (error) {
       this.toastr.danger(`User Error`, error, { duration: 2000, position: this.tp });
     }

@@ -10,8 +10,7 @@ import {
 import { NgModule } from "@angular/core";
 import { PagesComponent } from "./pages.component";
 import { AuthGuard } from "app/guards/auth.guard";
-import { UserService } from "app/services/user.service";
-import { UserRoles } from "app/@core/data/users";
+
 
 let role;
 const routes: Routes = [

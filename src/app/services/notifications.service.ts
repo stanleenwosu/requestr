@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppNotificaionType, AppNotification, AppNotificationPayload } from 'app/@core/data/notifications';
+import { UserRoles } from 'app/@core/data/users';
 
 import firebase from "firebase/app";
 import 'firebase/database'
@@ -18,6 +19,9 @@ export class NotificationsService {
 
   public get UserNotifications() {
     if (this.notifications.length == 0) {
+      if (this.userS.UserInfo.role === UserRoles.VENDOR){
+        this.getVendorNotifications()
+      }
       this.getNotifications()
     }
     return this.notifications
@@ -32,19 +36,64 @@ export class NotificationsService {
     this.db.ref(`notifications/${userId}`)
       .on('child_added', (snapshot) => {
         const data = snapshot.val()
-        console.log(data)
         this.notifications.push(data)
       })
   }
 
-  /* getN() {
-    const userId = this.userS.UserInfo.id
-    this.db.ref(`notifications/${userId}`)
-      .once('value', (snap) => {
-        console.log("DB Check")
-        console.log(snap.val())
+
+  addVendorNotification(orderId: string) {
+    const d = Date.now()
+    const not: AppNotification = {
+      id: 'NOT_' + d,
+      title: 'New Order',
+      message: `Order ${orderId} is available`,
+      userId: '',
+      timestamp: d,
+      view: false,
+      payload: {
+        type: AppNotificaionType.ORDER,
+        route: `orders/${orderId}`
+      }
+    }
+    return this.db.ref('vendors/' + not.id).set(not);
+  }
+
+
+  getVendorNotifications() {
+    this.db.ref(`vendors/`)
+      .on('child_added', (snapshot) => {
+        const data = snapshot.val()
+        this.notifications.push(data)
       })
-  } */
+  }
+
+  addStaffNotification(requestId: string) {
+    const d = Date.now()
+    const not: AppNotification = {
+      id: 'NOT_' + d,
+      title: 'New Order',
+      message: `Request ${requestId} is available`,
+      userId: '',
+      timestamp: d,
+      view: false,
+      payload: {
+        type: AppNotificaionType.ORDER,
+        route: `requests/${requestId}`
+      }
+    }
+    console.log(not)
+    return this.db.ref('staffs/' + not.id).set(not);
+  }
+
+
+  getStaffNotifications() {
+    this.db.ref(`staffs/`)
+      .on('child_added', (snapshot) => {
+        const data = snapshot.val()
+        console.log(data)
+        this.notifications.push(data)
+      })
+  }
 
 
 

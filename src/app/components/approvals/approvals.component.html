@@ -15,8 +15,8 @@
     }" (click)="view(r.id)">
     <div class="list-item-inner">
       <div class="row">
-        <div class="col-lg-4">
-          <label>{{ r.name }}</label>
+        <div class="col-4">
+          <span class="fs">{{ r.name }}</span>
         </div>
         <div class="col-2">
           <span class="fs"><i class="fa fa-user mr-1" aria-hidden="true"></i>{{ r.createdBy | getName | async}}</span>
@@ -43,5 +43,3 @@
     <label class="text-center" *ngIf="loadingApprovals === false">No Approval on List</label>
   </nb-list-item>
 </nb-list>
-
-

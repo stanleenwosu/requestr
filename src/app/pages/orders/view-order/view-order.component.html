@@ -9,8 +9,13 @@
       </ng-container>
     </nb-card-header>
     <nb-card-body>
+      <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN">
+        <button class="mx-1" nbButton status="danger" size="medium" (click)="delete()">
+          Delete Order
+        </button>
+      </ng-container>
       <ng-container *ngIf="userS.UserInfo?.role == role.VENDOR && !vendorBid">
-        <button class="mx-1" nbButton status="success" size="large" (click)="bid()">
+        <button class="mx-1" nbButton status="success" size="medium" (click)="bid()">
           Place Bid
         </button>
       </ng-container>
@@ -56,7 +61,6 @@
           </nb-list-item>
         </nb-list>
       </div>
-
     </nb-card-body>
   </nb-card>
 
@@ -68,21 +72,24 @@
       <div class="my-2">
         <nb-list>
           <nb-list-item>
-            Comment: <b>{{ rfo?.comment }}</b>
+            <span>
+              <label class="label"> Comment: </label>
+              <label><b>{{ rfo?.comment }}</b></label>
+            </span>
           </nb-list-item>
           <nb-list-item>
-            Attachment:
+            <label class="label"> Attachment: </label>
             <b><a *ngIf="rfo?.attachment" [href]="rfo?.attachment" target="_blank">
                 Click to Download
               </a></b>
-            <span *ngIf="!rfo?.attachment"> <b>None</b></span>
+            <label *ngIf="!rfo?.attachment"> <b>None</b></label>
           </nb-list-item>
           <nb-list-item>
-            No of Bids: <b>{{ bids?.length || 0 }}</b>
+            <label class="label">No of Bids: </label>
+            <label><b>{{ bids?.length || 0 }}</b></label>
           </nb-list-item>
         </nb-list>
       </div>
     </nb-card-body>
   </nb-card>
-
 </section>

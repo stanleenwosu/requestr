@@ -14,18 +14,18 @@ export const MENU_ITEMS: AppMenu[] = [
     role: [UserRoles.ADMIN, UserRoles.SUPER, UserRoles.STAFF, UserRoles.VENDOR]
   },
   {
-    title: 'Requests',
-    icon: 'flag-outline',
-    link: '/requests',
-    home: true,
-    role: [UserRoles.STAFF, UserRoles.SUPER]
-  },
-  {
     title: 'Awaiting Requests',
     icon: 'flag-outline',
     link: '/requests/awaiting-requests',
     home: true,
     role: [UserRoles.ADMIN, UserRoles.SUPER]
+  },
+  {
+    title: 'Requests',
+    icon: 'flag-outline',
+    link: '/requests/overview',
+    home: true,
+    role: [UserRoles.STAFF, UserRoles.SUPER]
   },
   {
     title: 'Purchase Orders',
