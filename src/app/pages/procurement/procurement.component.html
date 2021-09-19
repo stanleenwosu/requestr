@@ -1,5 +1,6 @@
 <section>
-  <div>
+ <div class="row">
+  <div class="col-md-6">
     <nb-card>
       <nb-card-header>
         <label class="label">Available Staffs</label>
@@ -11,17 +12,14 @@
               <nb-user size="small" [name]="user.name" [title]="user.role">
               </nb-user>
               <br />
-              <button nbButton size="tiny" statis="primary">Add to Procurement Team</button>
+              <button (click)="addToTeam(user?.id)" nbButton size="tiny" status="primary">Add to Procurement Team</button>
             </div>
           </nb-list-item>
         </nb-list>
       </nb-card-body>
     </nb-card>
   </div>
-</section>
-
-<section>
-  <div>
+  <div class="col-md-6">
     <nb-card>
       <nb-card-header>
         <label class="label">Team Members</label>
@@ -30,14 +28,15 @@
         <nb-list>
           <nb-list-item *ngFor="let user of team">
             <div class="w-100">
-              <nb-user size="small" [name]="user?.name" [title]="user?.role">
+              <nb-user size="small" [name]="user?.id | getName | async">
               </nb-user>
               <br />
-              <button nbButton size="tiny" statis="danger">Remove</button>
+              <button (click)="remove(user?.id)" nbButton size="tiny" status="danger">Remove</button>
             </div>
           </nb-list-item>
         </nb-list>
       </nb-card-body>
     </nb-card>
   </div>
+ </div>
 </section>

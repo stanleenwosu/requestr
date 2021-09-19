@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProcurementComponent } from './procurement.component';
 import { NbButtonModule, NbCardModule, NbFormFieldModule, NbIconModule, NbInputModule, NbListModule, NbUserModule } from '@nebular/theme';
 import { RouterModule } from '@angular/router';
+import { PipesModule } from 'app/pipes/pipes.module';
 
 
 
@@ -18,6 +19,7 @@ import { RouterModule } from '@angular/router';
     ]),
     NbCardModule,
     NbFormFieldModule,
+    PipesModule,
     NbInputModule,
     NbButtonModule,
     NbUserModule,

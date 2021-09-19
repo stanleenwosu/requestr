@@ -5,6 +5,7 @@ import { UserData } from '../../../@core/data/users';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { UserService } from 'app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private themeService: NbThemeService,
               private userService: UserData,
               private userS: UserService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -65,6 +67,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleSidebar() {
     this.sidebarService.expand()
+  }
+
+  goToNot() {
+
   }
 
   logout(){

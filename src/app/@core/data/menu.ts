@@ -14,6 +14,13 @@ export const MENU_ITEMS: AppMenu[] = [
     role: [UserRoles.ADMIN, UserRoles.SUPER, UserRoles.STAFF, UserRoles.VENDOR]
   },
   {
+    title: 'Notifications',
+    icon: 'bell-outline',
+    link: '/notifications',
+    home: true,
+    role: [UserRoles.ADMIN, UserRoles.SUPER, UserRoles.STAFF, UserRoles.VENDOR]
+  },
+  {
     title: 'Awaiting Requests',
     icon: 'flag-outline',
     link: '/requests/awaiting-requests',
@@ -87,13 +94,13 @@ export const MENU_ITEMS: AppMenu[] = [
     home: true,
     role: [UserRoles.SUPER]
   },
-  {
+  /* {
     title: 'Employees',
     icon: 'people-outline',
     link: '/employees',
     home: true,
     role: [UserRoles.SUPER]
-  },
+  }, */
   {
     title: 'Support',
     icon: 'question-mark-circle-outline',

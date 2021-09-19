@@ -1,113 +1,137 @@
-import { Injectable } from '@angular/core';
-import { AppNotificaionType, AppNotification, AppNotificationPayload } from 'app/@core/data/notifications';
-import { UserRoles } from 'app/@core/data/users';
+import { Injectable } from "@angular/core";
+import {
+  AppNotificaionType,
+  AppNotification,
+  AppNotificationPayload,
+} from "app/@core/data/notifications";
+import { UserRoles } from "app/@core/data/users";
 
 import firebase from "firebase/app";
-import 'firebase/database'
-import { UserService } from './user.service';
+import "firebase/database";
+import { UserService } from "./user.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-export class  NotificationsService {
-
-  private notifications: AppNotification[] = []
-  db = firebase.database()
-  constructor(
-    private userS: UserService
-  ) { }
+export class NotificationsService {
+  private notifications: AppNotification[] = [];
+  db = firebase.database();
+  constructor(private userS: UserService) { }
 
   public get UserNotifications() {
     if (this.notifications.length == 0) {
-      if (this.userS.UserInfo.role === UserRoles.VENDOR){
-        this.getVendorNotifications()
+      if (this.userS.UserInfo.role === UserRoles.VENDOR) {
+        this.getVendorNotifications();
       }
-      this.getNotifications()
+      if (this.userS.UserInfo.role === UserRoles.STAFF) {
+        this.getStaffNotifications();
+      }
+      this.getNotifications();
     }
-    return this.notifications
+    return this.notifications;
   }
 
   public set UserNotifications(notiication: AppNotification[]) {
-    this.notifications = notiication
+    this.notifications = notiication;
   }
 
   getNotifications() {
-    const userId = this.userS.UserInfo.id
-    this.db.ref(`notifications/${userId}`)
-      .on('child_added', (snapshot) => {
-        const data = snapshot.val()
-        this.notifications.push(data)
-      })
+    const userId = this.userS.UserInfo.id;
+    this.db.ref(`notifications/${userId}`).on("child_added", (snapshot) => {
+      const data = snapshot.val();
+      this.notifications.push(data);
+    });
   }
 
-
   addVendorNotification(orderId: string) {
-    const d = Date.now()
+    const d = Date.now();
     const not: AppNotification = {
-      id: 'NOT_' + d,
-      title: 'New Order',
+      id: "NOT_" + d,
+      title: "New Order",
       message: `Order ${orderId} is available`,
-      userId: '',
+      userId: "",
       timestamp: d,
       view: false,
       payload: {
         type: AppNotificaionType.ORDER,
-        route: `orders/${orderId}`
-      }
-    }
-    return this.db.ref('vendors/' + not.id).set(not);
+        route: `orders/${orderId}`,
+      },
+    };
+    return this.db.ref("vendors/" + not.id).set(not);
   }
 
-
   getVendorNotifications() {
-    this.db.ref(`vendors/`)
-      .on('child_added', (snapshot) => {
-        const data = snapshot.val()
-        this.notifications.push(data)
-      })
+    this.db.ref(`vendors/`).on("child_added", (snapshot) => {
+      const data = snapshot.val();
+      this.notifications.push(data);
+    });
   }
 
   addStaffNotification(requestId: string) {
-    const d = Date.now()
+    const d = Date.now();
     const not: AppNotification = {
-      id: 'NOT_' + d,
-      title: 'New Order',
+      id: "NOT_" + d,
+      title: "New Order",
       message: `Request ${requestId} is available`,
-      userId: '',
+      userId: "",
       timestamp: d,
       view: false,
       payload: {
         type: AppNotificaionType.ORDER,
-        route: `requests/${requestId}`
-      }
-    }
-    console.log(not)
-    return this.db.ref('staffs/' + not.id).set(not);
+        route: `requests/${requestId}`,
+      },
+    };
+    console.log(not);
+    return this.db.ref("staffs/" + not.id).set(not);
   }
-
 
   getStaffNotifications() {
-    this.db.ref(`staffs/`)
-      .on('child_added', (snapshot) => {
-        const data = snapshot.val()
-        console.log(data)
-        this.notifications.push(data)
-      })
+    this.db.ref(`staffs/`).on("child_added", (snapshot) => {
+      const data = snapshot.val();
+      this.notifications.push(data);
+    });
   }
 
-
-
-  addNotification(title: string, message: string, userId: string, payload: AppNotificationPayload) {
-    const d = Date.now()
+  addBidNotification(
+    type: "New" | "Update",
+    message: string,
+    orderId: string,
+    bidId: string,
+    group: "staffs" | 'supers' | 'admins'
+  ) {
+    const d = Date.now();
     const not: AppNotification = {
-      id: 'NOT_' + d,
+      id: "NOT_" + d,
+      title: `${type} Bid`,
+      message: message,
+      userId: "",
+      timestamp: d,
+      view: false,
+      payload: {
+        type: AppNotificaionType.ORDER,
+        route: `orders/${orderId}/bids/${bidId}`,
+      },
+    };
+    console.log(not);
+    return this.db.ref(`${group}/` + not.id).set(not);
+  }
+
+  addNotification(
+    title: string,
+    message: string,
+    userId: string,
+    payload: AppNotificationPayload
+  ) {
+    const d = Date.now();
+    const not: AppNotification = {
+      id: "NOT_" + d,
       title,
       message,
       userId,
       timestamp: d,
       view: false,
-      payload: payload
-    }
-    return this.db.ref('notifications/' + userId).set(not);
+      payload: payload,
+    };
+    return this.db.ref("notifications/" + userId).set(not);
   }
 }

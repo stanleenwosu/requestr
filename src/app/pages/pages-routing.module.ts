@@ -35,6 +35,11 @@ const routes: Routes = [
           import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
       },
       {
+        path: "notifications",
+        loadChildren: () =>
+          import("./notifications/notifications.module").then((m) => m.NotificationsModule),
+      },
+      {
         path: "requests",
         loadChildren: () =>
           import("./requests/requests.module").then((m) => m.RequestsModule),
