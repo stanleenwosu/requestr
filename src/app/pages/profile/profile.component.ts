@@ -21,9 +21,6 @@ export class ProfileComponent implements OnInit {
   vendorForm: FormGroup;
 
   tp = NbGlobalPhysicalPosition.BOTTOM_RIGHT;
-  cfile: any[];
-  afile: any[];
-  uploadProgress;
   uploading;
   cac_f: any;
   cac_fu: any;
@@ -113,6 +110,7 @@ export class ProfileComponent implements OnInit {
   }
 
   uploadCAC(files) {
+    console.log(files)
     try {
       if (files.length === 0) return;
       let mimeType = files[0].type;
@@ -138,6 +136,7 @@ export class ProfileComponent implements OnInit {
 
 
   uploadATTH(files) {
+    console.log(files)
     try {
       if (files.length === 0) return;
       let mimeType = files[0].type;
