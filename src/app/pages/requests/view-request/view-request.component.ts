@@ -18,6 +18,11 @@ export class ViewRequestComponent implements OnInit {
   rfo: RFO = null
   rfoS = RFO_Status
   role = UserRoles
+  action = {
+    type: null,
+    message: '',
+    comment: null
+  }
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -44,6 +49,7 @@ export class ViewRequestComponent implements OnInit {
 
   async approve() {
     this.rfo.status = RFO_Status.APPROVED
+    this.rfo.comment = this.action.comment
     await this.reqS.updateRFO(this.rfo)
     if (this.rfo.type == 'REQUEST') {
       return;
@@ -73,6 +79,33 @@ export class ViewRequestComponent implements OnInit {
 
   deny() {
     this.rfo.status = RFO_Status.REJECTED
+    this.rfo.comment = this.action.comment
+    this.save()
+  }
+
+  actionApprove() {
+    this.action.type = 'APPROVE'
+    this.action.comment = null
+    this.action.message = 'Reason for Approving Request'
+  }
+
+  actionDeny() {
+    this.action.type = 'DENY'
+    this.action.comment = null
+    this.action.message = 'Reason for Denying Request'
+  }
+
+  takeAction() {
+    if (this.action.type === 'APPROVE') {
+      this.approve()
+    }
+    if (this.action.type === 'DENY') {
+      this.deny()
+    }
+  }
+
+  review() {
+    this.rfo.status = RFO_Status.PENDING
     this.save()
   }
 

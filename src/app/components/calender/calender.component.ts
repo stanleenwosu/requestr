@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogRef } from '@nebular/theme';
 
 @Component({
   selector: 'calender',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalenderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dialogRef: NbDialogRef<CalenderComponent>,
+  ) { }
 
   ngOnInit(): void {
   }
 
+  handleDateChange(e) {
+    this.dialogRef.close(e)
+  }
 }

@@ -7,8 +7,10 @@ import { User } from 'app/@core/data/users';
 import { NotificationsService } from 'app/services/notifications.service';
 import { RequestService } from 'app/services/request.service';
 import { UserService } from 'app/services/user.service';
+import { NbDialogService } from '@nebular/theme';
 import firebase from 'firebase/app'
 import "firebase/storage";
+import { CalenderComponent } from 'app/components/calender/calender.component';
 
 @Component({
   selector: 'make-request',
@@ -31,13 +33,16 @@ export class MakeRequestComponent implements OnInit {
     msg: ''
   }
   type: 'REQUEST' | 'ORDER'
+  todayDate = null
   constructor(
     private fb: FormBuilder,
     private userS: UserService,
     private reqS: RequestService,
     private toastr: NbToastrService,
     private route: ActivatedRoute,
-    private notS: NotificationsService
+    private notS: NotificationsService,
+    private dialogS: NbDialogService
+
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +59,7 @@ export class MakeRequestComponent implements OnInit {
 
   async init() {
     this.type = this.route.snapshot.data['type']
+    this.todayDate = new Date(Date.now()).getDate();
   }
 
   item() {
@@ -77,6 +83,17 @@ export class MakeRequestComponent implements OnInit {
     this.items().removeAt(i)
   }
 
+  /*  openCalender() {
+     this.dialogS.open(CalenderComponent, {
+       hasBackdrop: true
+     })
+       .onClose.subscribe(date => {
+         if (date) {
+           this.requestForm.patchValue({'deadline': date})
+         }
+       });
+   }
+  */
   async submit(attachmentURL = '') {
     const d = Date.now()
     const { name, detail, userId, deadline, items } = this.requestForm.value
@@ -113,6 +130,14 @@ export class MakeRequestComponent implements OnInit {
   handleDateChange(e) {
     const d = new Date(e)
     this.requestForm.patchValue({ deadline: d })
+  }
+
+  cT(rowId) {
+    console.log(rowId)
+    const row = this.items().at(rowId)
+    const total = (row.value['quantity'] || 1) * (row.value['amount'] || 0)
+    console.log(total)
+    row.patchValue({ total })
   }
 
   upload(files) {

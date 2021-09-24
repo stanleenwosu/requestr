@@ -20,12 +20,15 @@
                 <div class="item py-2" *ngFor="let item of items().controls; let i = index" [formGroupName]='i'>
                   <div class="name"><input nbInput fullWidth type="text" formControlName="name"
                       placeholder="Item Description" class="form-control" /></div>
-                  <div class="amount"><input nbInput fullWidth type="text" formControlName="amount"
-                      placeholder="Unit Price" class="form-control" /></div>
-                  <div class="quantity"><input nbInput fullWidth type="number" formControlName="quantity"
-                      placeholder="Qty" class="form-control" /></div>
-                  <div class="total"><input nbInput fullWidth type="text" formControlName="total" placeholder="Total"
-                      class="form-control" /></div>
+                  <div class="amount"><input nbInput fullWidth type="number" formControlName="amount"
+                      placeholder="Unit Price" class="form-control" (keyup)="cT(i)" /></div>
+                  <div class="quantity">
+                    <input nbInput fullWidth type="number" formControlName="quantity"
+                      placeholder="Qty" class="form-control" (keyup)="cT(i)" /></div>
+                  <div class="total">
+                    <input disabled="true" nbInput fullWidth type="text" formControlName="total" placeholder="Total"
+                      class="form-control" />
+                    </div>
                   <div><button type="button" nbButton size="small" status="danger" (click)="removeItem(i)">
                       <nb-icon icon="close-outline"></nb-icon>Remove
                     </button></div>
@@ -39,7 +42,8 @@
 
               <div class="mt-3">
                 <label class="label" for="calender">Select Deadline (If available)</label>
-                <nb-calendar size="medium" (dateChange)="handleDateChange($event)"></nb-calendar>
+                <input nbInput fullWidth fieldSize="medium" type="date" name="name" class="form-control"
+                 [min]="todayDate" formControlName="deadline" />
               </div>
 
               <div class="input-group">
@@ -67,12 +71,6 @@
                       <p class="text-danger" *ngIf="msgDisplay.type">* {{ msgDisplay?.msg }}</p>
                     </div>
                   </div>
-                  <!--  <div class="col-12 my-2 p-1">
-                  <button type="button" nbButton status="primary" [disabled]="!fileInfo" class="w-100 p-3"
-                    (click)="uploadFiles()">
-                    UPLOAD FILE
-                  </button>
-                </div> -->
                 </div>
               </div>
 

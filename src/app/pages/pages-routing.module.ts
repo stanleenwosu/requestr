@@ -103,12 +103,24 @@ const routes: Routes = [
         loadChildren: () =>
           import("./users/users.module").then((m) => m.UsersModule),
       },
+      {
+        path: "profile",
+        loadChildren: () =>
+          import("./profile/profile.module").then((m) => m.ProfileModule),
+      },
+
     ],
   },
   {
     path: "auth",
     component: NbAuthComponent,
     loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule),
+  },
+  {
+    path: "terms-and-conditions",
+    component: NbAuthComponent,
+    loadChildren: () =>
+      import("./toc/toc.module").then((m) => m.TocModule),
   },
   { path: "**", redirectTo: "auth" },
 ];

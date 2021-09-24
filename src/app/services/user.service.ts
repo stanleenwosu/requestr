@@ -50,6 +50,10 @@ export class UserService {
     return this.uDB.doc(user.id).set(user)
   }
 
+  async updateUser(user:User) {
+    return await this.uDB.doc(user.id).update(user)
+  }
+
   async getUser(id: string) {
     const res = await this.uDB.where('id', '==', id).get();
     if (res.docs.length > 0)
@@ -74,7 +78,14 @@ export class UserService {
 
   async getStaffs() {
     const res = await this.uDB.where('role', '==', UserRoles.STAFF).get();
-    return (await res.docs.map(r => r.data())) as User[]
+    return (res.docs.map(r => r.data())) as User[]
+  }
+
+  async getAdmins() {
+    const res = await this.uDB
+      .where('role', '==', UserRoles.ADMIN)
+      .get();
+    return (res.docs.map(r => r.data())) as User[]
   }
 
 }

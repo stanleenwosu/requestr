@@ -15,7 +15,7 @@
       icon="bell-outline"
      (click)="goToNot()"
     ></nb-action> -->
-    <nb-action class="user-action" *nbIsGranted="['view', 'user']">
+    <nb-action (click)="goToProfile()">
       <nb-user
         [nbContextMenu]="userMenu"
         [onlyPicture]="userPictureOnly"

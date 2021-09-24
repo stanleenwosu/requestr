@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NbGlobalPhysicalPosition, NbToastrService } from "@nebular/theme";
-import { User } from "app/@core/data/users";
+import { User, UserRoles } from "app/@core/data/users";
 import { AppService } from 'app/services/app.service';
 import { UserService } from 'app/services/user.service';
 @Component({
@@ -13,7 +13,9 @@ export class EmployeesComponent implements OnInit {
 
   form: FormGroup;
   tp = NbGlobalPhysicalPosition.BOTTOM_RIGHT
-  users: User[]
+  staffs: User[]
+  admins: User[]
+  loading = true
   constructor(
     private fb: FormBuilder,
     private userS: UserService,
@@ -31,7 +33,9 @@ export class EmployeesComponent implements OnInit {
   }
 
   async init() {
-    this.users = await this.userS.getUsers()
+    this.staffs = await this.userS.getStaffs()
+    this.admins = await this.userS.getAdmins()
+    this.loading = false
     return;
   }
   submit() {
@@ -56,5 +60,42 @@ export class EmployeesComponent implements OnInit {
   }
 
   generatePassword() { }
+
+
+  async makeAdmin(uid:string) {
+    const res = this.admins.filter(u => u.id === uid)
+    if (res.length > 0) {
+      this.appS.showToast('danger', 'User is aleady an Admin', 'Staffs')
+      return
+    }
+    try {
+      let user = await this.userS.getUser(uid)
+      user.role = UserRoles.ADMIN
+      this.userS.updateUser(user)
+      this.appS.showToast('success', 'User is now an Admin', 'Staffs')
+      this.init()
+    } catch (error) {
+      this.appS.showToast('danger', error, 'Staffs')
+    }
+  }
+
+
+
+  async makeStaff(uid:string) {
+    const res = this.staffs.filter(u => u.id === uid)
+    if (res.length > 0) {
+      this.appS.showToast('danger', 'User is aleady a Staff', 'Staffs')
+      return
+    }
+    try {
+      let user = await this.userS.getUser(uid)
+      user.role = UserRoles.STAFF
+      this.userS.updateUser(user)
+      this.appS.showToast('success', 'User is now a Staff', 'Staffs')
+      this.init()
+    } catch (error) {
+      this.appS.showToast('danger', error, 'Staffs')
+    }
+  }
 
 }

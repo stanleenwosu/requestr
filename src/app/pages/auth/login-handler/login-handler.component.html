@@ -1,5 +1,5 @@
 <div class="text-center">
   <nb-icon icon="person-outline"></nb-icon>
-  <label class="label" *ngIf="type === 'login'">Logining into your Account...</label>
+  <label class="label" *ngIf="type === 'login'">Logining into your {{ role | titlecase}} Account...</label>
   <label class="label" *ngIf="type === 'signup'">Creating Account...</label>
 </div>

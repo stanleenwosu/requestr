@@ -11,7 +11,7 @@
         outline
         status="primary"
         size="medium"
-        (click)="role = 'Vendor'"
+        (click)="role = 'vendor'"
       >
         Vendor
       </button>
@@ -23,7 +23,7 @@
         outline
         status="primary"
         size="medium"
-        (click)="role = 'Staff'"
+        (click)="role = 'staff'"
       >
         Staff
       </button>
@@ -35,14 +35,14 @@
         outline
         status="primary"
         size="medium"
-        (click)="role = 'Admin'"
+        (click)="role = 'admin'"
       >
         Admin
       </button>
     </div>
   </div>
   <div class="my-3">
-    <p class="sub-title"><b>You are about to Login as a {{ role }}</b></p>
+    <p class="sub-title"><b>You are about to Login as a {{ role | titlecase }}</b></p>
   </div>
 
 </section>
@@ -159,7 +159,7 @@
     [class.btn-pulse]="submitted"
     type="button"
     [routerLink]="['/auth/login-handler']"
-    [state]="{ user: user, type: 'login' }"
+    [state]="{ user: user, type: 'login', role: role }"
   >
     Log In
   </button>

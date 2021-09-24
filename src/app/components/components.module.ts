@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RequestsComponent } from './requests/requests.component';
-import { NbButtonModule, NbCardModule, NbDialogModule, NbIconModule, NbInputModule, NbListModule, NbSpinnerModule } from '@nebular/theme';
+import { NbButtonModule, NbCalendarModule, NbCardModule, NbDialogModule, NbIconModule, NbInputModule, NbListModule, NbSpinnerModule } from '@nebular/theme';
 import { DemoBlockComponent } from './demo-block/demo-block.component';
 import { ApprovalsComponent } from './approvals/approvals.component';
 import { PipesModule } from 'app/pipes/pipes.module';
@@ -20,7 +20,8 @@ const components = [
   PurchaseOrdersComponent,
   PlaceBidComponent,
   ConfirmDialogComponent,
-  NotificationsComponent
+  NotificationsComponent,
+  CalenderComponent
 ]
 
 @NgModule({
@@ -33,6 +34,7 @@ const components = [
     NbCardModule,
     NbIconModule,
     NbSpinnerModule,
+    NbCalendarModule,
     NbInputModule,
     NbButtonModule,
     PipesModule,

@@ -94,13 +94,13 @@ export const MENU_ITEMS: AppMenu[] = [
     home: true,
     role: [UserRoles.SUPER]
   },
-  /* {
-    title: 'Employees',
+  {
+    title: 'Staffs',
     icon: 'people-outline',
     link: '/employees',
     home: true,
     role: [UserRoles.SUPER]
-  }, */
+  },
   {
     title: 'Support',
     icon: 'question-mark-circle-outline',

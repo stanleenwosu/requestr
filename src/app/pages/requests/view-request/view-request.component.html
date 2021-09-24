@@ -83,17 +83,39 @@
       </nb-list>
     </div>
   </nb-card-body>
-  <nb-card-footer *ngIf="userS.UserInfo?.role == role.ADMIN && rfo?.status === rfoS.PENDING">
-    <p *ngIf="rfo?.type == 'order'" class="text-danger mb-2">
-      Note: Once a request is Approved or Denied, it can be changed. Changes
-      will have to be made from purchase order
-    </p>
+  <nb-card-footer>
+    <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN && rfo?.status === rfoS.PENDING">
+      <ng-container *ngIf="!action.type">
+        <button class="mx-1" nbButton status="success" size="medium" (click)="actionApprove()">
+          Approve
+        </button>
+        <button class="mx-1" nbButton status="danger" size="medium" (click)="actionDeny()">
+          Deny
+        </button>
+      </ng-container>
 
-    <button class="mx-1" nbButton status="success" size="medium" (click)="approve()">
-      Approve
-    </button>
-    <button class="mx-1" nbButton status="danger" size="medium" (click)="deny()">
-      Deny
-    </button>
+      <ng-container *ngIf="action.type">
+        <div class="input-group">
+          <label class="label" for="raason">Reason for {{ action?.message }}</label>
+          <textarea nbInput [(ngModel)]="action.comment" fullWidth name="reason" class="form-control"></textarea>
+        </div>
+        <div class="py-1">
+          <button class="mx-1" [disabled]="action.comment == ''" nbButton status="primary" size="medium" (click)="takeAction()">
+            {{ action?.type | titlecase }}
+          </button>
+          <button class="mx-1" nbButton outline status="primary" size="medium" (click)="action.type = null">
+            Cancel
+          </button>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN && rfo?.status === rfoS.REJECTED">
+      <div class="py-1">
+        <button class="mx-1" nbButton outline status="info" size="medium" (click)="review()">
+          Mark for Review
+        </button>
+      </div>
+    </ng-container>
   </nb-card-footer>
 </nb-card>

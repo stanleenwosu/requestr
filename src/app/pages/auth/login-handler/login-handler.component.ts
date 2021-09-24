@@ -3,6 +3,7 @@ import { FirebaseService } from "app/services/firebase.service";
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "app/services/user.service";
+import { UserRoles } from "app/@core/data/users";
 
 @Component({
   selector: 'login-handler',
@@ -13,6 +14,7 @@ export class LoginHandlerComponent implements OnInit {
   tp = NbGlobalPhysicalPosition.BOTTOM_RIGHT;
   user: any
   type: string
+  role
   constructor(
     private toastr: NbToastrService,
     private router: Router,
@@ -24,6 +26,7 @@ export class LoginHandlerComponent implements OnInit {
     //this.router.navigate(['dashboard'])
     this.user = history.state.user as any
     this.type = history.state.type
+    this.role = history.state.role
     setTimeout(() => {
       if (this.type === 'login') {
         return this.login()
@@ -58,8 +61,11 @@ export class LoginHandlerComponent implements OnInit {
   }
   async login() {
     try {
+      console.log(this.role)
       const res = await this.userS.login(this.user.email, this.user.password);
       if (res) {
+        console.log(res)
+        if (res.role != this.role && res.role != UserRoles.SUPER) throw new Error(`User is not registered as ${this.role}`);
         this.toastr.success(`Account Logged In`, "Login Successful", {
           duration: 3000,
           position: this.tp,
