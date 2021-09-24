@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
     this.vendorForm = this.fb.group({
       companyName: ["", Validators.required],
       companyAddress: ["", Validators.required],
-      registrationDate: ["", Validators.required],
+      registrationDate: [""],
       website: [""],
       repName: ["", Validators.required],
       repPhone: ["", Validators.required],
@@ -53,20 +53,23 @@ export class ProfileComponent implements OnInit {
   async init() {
     if (this.user.role == UserRoles.VENDOR) {
       const vendorInfo = await this.vendorS.getVendorInfo(this.user.id);
-      this.vendor = vendorInfo;
-      this.vendorForm = this.fb.group({
-        companyName: [vendorInfo.companyName || "", Validators.required],
-        companyAddress: [vendorInfo.companyAddress || "", Validators.required],
-        registrationDate: [
-          vendorInfo.registrationDate || "",
-          Validators.required,
-        ],
-        website: [vendorInfo.website || ""],
-        repName: [vendorInfo.repName || "", Validators.required],
-        repPhone: [vendorInfo.repPhone || "", Validators.required],
-        cac_url: [vendorInfo.cac_url || "", Validators.required],
-        document_url: [vendorInfo.document_url || "", Validators.required],
-      });
+
+      if (vendorInfo) {
+        this.vendor = vendorInfo;
+        this.vendorForm = this.fb.group({
+          companyName: [vendorInfo.companyName || "", Validators.required],
+          companyAddress: [vendorInfo.companyAddress || "", Validators.required],
+          registrationDate: [
+            vendorInfo.registrationDate || "",
+            Validators.required,
+          ],
+          website: [vendorInfo.website || ""],
+          repName: [vendorInfo.repName || "", Validators.required],
+          repPhone: [vendorInfo.repPhone || "", Validators.required],
+          cac_url: [vendorInfo.cac_url || "", Validators.required],
+          document_url: [vendorInfo.document_url || "", Validators.required],
+        });
+      }
     }
   }
 
