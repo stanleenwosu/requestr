@@ -1,121 +1,124 @@
-<nb-card [nbSpinner]="!rfo">
-  <nb-card-header>
-    <h4>{{ rfo?.name }}</h4>
-    <button *ngIf="
-        userS.UserInfo?.id === rfo?.createdBy &&
-        !rfo?.resolved &&
-        rfo.status === rfoS.PENDING
-      " class="mx-2" nbButton status="danger" size="madium" (click)="cancel()">
-      Cancel RFO
-    </button>
-  </nb-card-header>
-  <nb-card-body>
-    <div class="my-2">
-      <label>Items being requested for:</label>
-      <nb-list>
-        <nb-list-item>
-          <div class="row w-100">
-            <div class="col-md-4"><label class="label">Name</label></div>
-            <div class="col-md-2"><label class="label">Price</label></div>
-            <div class="col-md-3"><label class="label">Quantity</label></div>
-            <div class="col-md-3"><label class="label">Total</label></div>
-          </div>
-        </nb-list-item>
-        <nb-list-item *ngFor="let item of rfo?.items">
-          <div class="row w-100">
-            <div class="col-md-4">
-              <label>{{ item?.name }}</label>
+<section>
+  <nb-card [nbSpinner]="!rfo">
+    <nb-card-header>
+      <h4>{{ rfo?.name }}</h4>
+      <button *ngIf="
+          userS.UserInfo?.id === rfo?.createdBy &&
+          !rfo?.resolved &&
+          rfo.status === rfoS.PENDING
+        " class="mx-2" nbButton status="danger" size="madium" (click)="cancel()">
+        Cancel RFO
+      </button>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="my-2">
+        <label>Items being requested for:</label>
+        <nb-list>
+          <nb-list-item>
+            <div class="row w-100">
+              <div class="col-md-4"><label class="label">Name</label></div>
+              <div class="col-md-2"><label class="label">Price</label></div>
+              <div class="col-md-3"><label class="label">Quantity</label></div>
+              <div class="col-md-3"><label class="label">Total</label></div>
             </div>
-            <div class="col-md-2">
-              <label>{{ item?.amount }}</label>
+          </nb-list-item>
+          <nb-list-item *ngFor="let item of rfo?.items">
+            <div class="row w-100">
+              <div class="col-md-4">
+                <label>{{ item?.name }}</label>
+              </div>
+              <div class="col-md-2">
+                <label>{{ item?.amount }}</label>
+              </div>
+              <div class="col-md-3">
+                <label>{{ item?.quantity }}</label>
+              </div>
+              <div class="col-md-3">
+                <label>{{ item?.total }}</label>
+              </div>
             </div>
-            <div class="col-md-3">
-              <label>{{ item?.quantity }}</label>
-            </div>
-            <div class="col-md-3">
-              <label>{{ item?.total }}</label>
-            </div>
-          </div>
-        </nb-list-item>
-      </nb-list>
-    </div>
-    <div class="my-2">
-      <nb-list>
-        <nb-list-item>
-          <span>
-            <label class="label">Created By:</label>
-            <label><b>{{ rfo?.createdBy | getName | async }}</b></label>
-          </span>
-        </nb-list-item>
-        <nb-list-item>
-          <span>
-            <label class="label">Created on:</label>
-            <label><b>{{ rfo?.createdOn | date }}</b></label>
-          </span>
-        </nb-list-item>
-        <nb-list-item>
-          <span>
-            <label class="label">Additional Info:</label>
-            <label> <b>{{ rfo?.detail }} </b> </label>
-          </span>
-        </nb-list-item>
-        <nb-list-item>
-          <span>
-            <label class="label">Status:</label>
-            <label><b>{{ rfo?.status | uppercase }}</b></label>
-          </span>
-        </nb-list-item>
-        <nb-list-item>
-          <span>
-            <label class="label"> Comment:</label>
-            <label><b>{{ rfo?.comment }}</b></label>
-          </span>
-        </nb-list-item>
-        <nb-list-item>
-          <span>
-            <label class="label">Attachment:</label>
-            <a *ngIf="rfo?.attachment" [href]="rfo?.attachment" target="_blank">
-              <b>Click to Download </b>
-            </a>
-            <label><b *ngIf="!rfo?.attachment"> None</b></label>
-          </span>
-        </nb-list-item>
-      </nb-list>
-    </div>
-  </nb-card-body>
-  <nb-card-footer>
-    <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN && rfo?.status === rfoS.PENDING">
-      <ng-container *ngIf="!action.type">
-        <button class="mx-1" nbButton status="success" size="medium" (click)="actionApprove()">
-          Approve
-        </button>
-        <button class="mx-1" nbButton status="danger" size="medium" (click)="actionDeny()">
-          Deny
-        </button>
-      </ng-container>
-
-      <ng-container *ngIf="action.type">
-        <div class="input-group">
-          <label class="label" for="raason">Reason for {{ action?.message }}</label>
-          <textarea nbInput [(ngModel)]="action.comment" fullWidth name="reason" class="form-control"></textarea>
-        </div>
-        <div class="py-1">
-          <button class="mx-1" [disabled]="action.comment == ''" nbButton status="primary" size="medium" (click)="takeAction()">
-            {{ action?.type | titlecase }}
-          </button>
-          <button class="mx-1" nbButton outline status="primary" size="medium" (click)="action.type = null">
-            Cancel
-          </button>
-        </div>
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN && rfo?.status === rfoS.REJECTED">
-      <div class="py-1">
-        <button class="mx-1" nbButton outline status="info" size="medium" (click)="review()">
-          Mark for Review
-        </button>
+          </nb-list-item>
+        </nb-list>
       </div>
-    </ng-container>
-  </nb-card-footer>
-</nb-card>
+      <div class="my-2">
+        <nb-list>
+          <nb-list-item>
+            <span>
+              <label class="label">Created By:</label>
+              <label><b>{{ rfo?.createdBy | getName | async }}</b></label>
+            </span>
+          </nb-list-item>
+          <nb-list-item>
+            <span>
+              <label class="label">Created on:</label>
+              <label><b>{{ rfo?.createdOn | date }}</b></label>
+            </span>
+          </nb-list-item>
+          <nb-list-item>
+            <span>
+              <label class="label">Additional Info:</label>
+              <label> <b>{{ rfo?.detail }} </b> </label>
+            </span>
+          </nb-list-item>
+          <nb-list-item>
+            <span>
+              <label class="label">Status:</label>
+              <label><b>{{ rfo?.status | uppercase }}</b></label>
+            </span>
+          </nb-list-item>
+          <nb-list-item>
+            <span>
+              <label class="label"> Comment:</label>
+              <label><b>{{ rfo?.comment }}</b></label>
+            </span>
+          </nb-list-item>
+          <nb-list-item>
+            <span>
+              <label class="label">Attachment:</label>
+              <a *ngIf="rfo?.attachment" [href]="rfo?.attachment" target="_blank">
+                <b>Click to Download </b>
+              </a>
+              <label><b *ngIf="!rfo?.attachment"> None</b></label>
+            </span>
+          </nb-list-item>
+        </nb-list>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN && rfo?.status === rfoS.PENDING">
+        <ng-container *ngIf="!action.type">
+          <button class="mx-1" nbButton status="success" size="medium" (click)="actionApprove()">
+            Approve
+          </button>
+          <button class="mx-1" nbButton status="danger" size="medium" (click)="actionDeny()">
+            Deny
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="action.type">
+          <div class="input-group">
+            <label class="label" for="raason">Reason for {{ action?.message }}</label>
+            <textarea nbInput [(ngModel)]="action.comment" fullWidth name="reason" class="form-control"></textarea>
+          </div>
+          <div class="py-1">
+            <button class="mx-1" [disabled]="action.comment == ''" nbButton status="primary" size="medium" (click)="takeAction()">
+              {{ action?.type | titlecase }}
+            </button>
+            <button class="mx-1" nbButton outline status="primary" size="medium" (click)="action.type = null">
+              Cancel
+            </button>
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN && rfo?.status === rfoS.REJECTED">
+        <div class="py-1">
+          <button class="mx-1" nbButton outline status="info" size="medium" (click)="review()">
+            Mark for Review
+          </button>
+        </div>
+      </ng-container>
+    </nb-card-footer>
+  </nb-card>
+
+</section>

@@ -18,6 +18,7 @@ import {
 } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -37,8 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
-    ThemeModule.forRoot(),
-
+    ThemeModule.forRoot()
   ],
   bootstrap: [AppComponent],
 })

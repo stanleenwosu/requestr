@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "app/services/user.service";
 import { UserRoles } from "app/@core/data/users";
 
+
+
 @Component({
   selector: 'login-handler',
   templateUrl: './login-handler.component.html',
@@ -15,6 +17,7 @@ export class LoginHandlerComponent implements OnInit {
   user: any
   type: string
   role
+
   constructor(
     private toastr: NbToastrService,
     private router: Router,
@@ -82,4 +85,5 @@ export class LoginHandlerComponent implements OnInit {
       this.router.navigate(['auth'])
     }
   }
+
 }

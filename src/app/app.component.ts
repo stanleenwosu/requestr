@@ -8,11 +8,15 @@ import { AnalyticsService } from './@core/utils/analytics.service';
 import { SeoService } from './@core/utils/seo.service';
 import firebase from "firebase/app";
 import { firebaseConfig } from 'environments/environment';
+
 @Component({
   selector: 'ngx-app',
-  template: '<router-outlet></router-outlet>',
+  template: `
+  <router-outlet> </router-outlet>
+  `,
 })
 export class AppComponent implements OnInit {
+
 
   constructor(private analytics: AnalyticsService, private seoService: SeoService) {
     firebase.initializeApp(firebaseConfig)
@@ -22,4 +26,5 @@ export class AppComponent implements OnInit {
     this.analytics.trackPageViews();
     this.seoService.trackCanonicalChanges();
   }
+
 }

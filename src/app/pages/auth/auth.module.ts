@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginHandlerComponent } from './login-handler/login-handler.component';
 
 
+
 const AuthComponents = [
   LoginComponent,
   RegisterComponent,
