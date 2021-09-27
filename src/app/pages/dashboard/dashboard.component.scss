@@ -1,0 +1,17 @@
+:root {
+  --scrollbarBG: #CFD8DC;
+  --thumbBG: #90A4AE;
+}
+
+.notify-div {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+.notify-div::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+.notify-div::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}

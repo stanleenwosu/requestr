@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
   async init() {
     if (this.user.role == UserRoles.VENDOR) {
       const vendorInfo = await this.vendorS.getVendorInfo(this.user.id);
+      this.vendor = vendorInfo
 
       if (vendorInfo) {
         this.vendor = vendorInfo;

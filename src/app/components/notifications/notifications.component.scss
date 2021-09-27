@@ -9,6 +9,13 @@
 .n-header {
   display: flex;
   justify-content: space-between;
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  .label {
+    font-size: 0.6rem;
+  }
 }
 
 .n-title {
@@ -21,6 +28,17 @@
 
 .n-route {
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: underline !important;
   font-size: 0.7rem;
 }
+
+.n-route:hover {
+  color: #a16eff !important;
+}
+
+nb-list-item {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+

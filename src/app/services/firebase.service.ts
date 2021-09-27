@@ -81,14 +81,17 @@ export class FirebaseService {
     if (!lastDocId) {
       return this.getColWithLimit(colPath, noOfItems);
     }
-    const lastDoc = this.getDoc(colPath, lastDocId);
+    console.log(lastDocId)
+    const lastDoc = await firebase.firestore().collection(colPath).doc(lastDocId).get()
+
     const res = await firebase
       .firestore()
       .collection(colPath)
       .orderBy("timestamp", "desc")
       .startAfter(lastDoc)
-      .limitToLast(noOfItems)
+      .limit(noOfItems)
       .get();
+    console.log(res.docs.map((r) => r.data()) as any[])
     return res.docs.map((r) => r.data()) as any[];
   }
 
@@ -106,5 +109,4 @@ export class FirebaseService {
       .update(data);
   }
 
-  async
 }

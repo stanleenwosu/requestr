@@ -19,7 +19,7 @@
           <span class="fs">{{ r?.name }}</span>
         </div>
         <div class="col-2">
-          <span class="fs"><i class="fa fa-user mr-1" aria-hidden="true"></i>{{ r?.createdBy | getName | async}}</span>
+          <span class="fs"><i class="fa fa-user mr-1" aria-hidden="true"></i>{{ r?.createdBy | getName | async }}</span>
         </div>
         <div class="col-2">
           <span class="fs">{{ r?.createdOn | date }}</span>
@@ -45,7 +45,14 @@
       </div>
     </div>
   </nb-list-item>
-  <nb-list-item *ngIf="requestsInView.length == 0">
-    <label class="text-center" *ngIf="loadingRequests === false">No Requests on List</label>
-  </nb-list-item>
 </nb-list>
+
+<div *ngIf="isEmpty" class="text-center py-2">
+  <p class="label text-center" *ngIf="loadingRequests === false">No Requests on List</p>
+</div>
+
+<div *ngIf="!isEmpty" class="text-center py-2">
+  <button nbButton status="primary" size="small" (click)="paginate()">
+    Load More
+  </button>
+</div>

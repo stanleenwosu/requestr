@@ -8,7 +8,7 @@ export class AppMenu extends NbMenuItem {
 export const MENU_ITEMS: AppMenu[] = [
   {
     title: 'Dashboard',
-    icon: 'home-outline',
+    icon: 'activity-outline',
     link: '/dashboard',
     home: true,
     role: [UserRoles.ADMIN, UserRoles.SUPER, UserRoles.STAFF, UserRoles.VENDOR]
@@ -22,7 +22,7 @@ export const MENU_ITEMS: AppMenu[] = [
   },
   {
     title: 'Awaiting Requests',
-    icon: 'flag-outline',
+    icon: 'clock-outline',
     link: '/requests/awaiting-requests',
     home: true,
     role: [UserRoles.ADMIN, UserRoles.SUPER]
@@ -43,7 +43,7 @@ export const MENU_ITEMS: AppMenu[] = [
   },
   {
     title: 'Bids',
-    icon: 'shopping-bag-outline',
+    icon: 'collapse-outline',
     link: '/bids',
     home: true,
     role: [UserRoles.VENDOR]
@@ -75,7 +75,7 @@ export const MENU_ITEMS: AppMenu[] = [
   }, */
   {
     title: 'Suppliers',
-    icon: 'cube-outline',
+    icon: 'car-outline',
     link: '/suppliers',
     home: true,
     role: [UserRoles.ADMIN, UserRoles.SUPER]
@@ -89,7 +89,7 @@ export const MENU_ITEMS: AppMenu[] = [
   },
   {
     title: 'Procurement Team',
-    icon: 'people-outline',
+    icon: 'person-done-outline',
     link: '/procurements',
     home: true,
     role: [UserRoles.SUPER]

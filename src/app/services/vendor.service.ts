@@ -33,7 +33,7 @@ export class VendorService {
   }
 
   async getVendorInfo(vid: string) {
-    const res = await this.db.doc(vid).get()
+    const res = await this.vDb.doc(vid).get()
     if (res.exists) {
       return res.data() as Vendor
     }

@@ -10,7 +10,7 @@ import { FirebaseService } from "./firebase.service";
 export class RequestService {
   rfoDB = firebase.firestore().collection("RFOs");
   colPath = "RFOs";
-  constructor(private fireS: FirebaseService) {}
+  constructor(private fireS: FirebaseService) { }
 
   addRFO(rfo: RFO) {
     return this.rfoDB.doc(rfo.id).set(rfo);
@@ -29,7 +29,7 @@ export class RequestService {
     return res;
   }
 
-  getRFOs(noOfItems = 10) {
+  getRFOs(noOfItems = 5) {
     return this.fireS.getColWithLimit(this.colPath, noOfItems);
   }
 
@@ -37,17 +37,35 @@ export class RequestService {
     const res = await firebase
       .firestore()
       .collection(this.colPath)
-      .orderBy("timestamp", "desc")
       .where("createdBy", "==", userId)
+      .orderBy("timestamp", "desc")
+      .limit(5)
       .get();
     return res.docs.map((r) => r.data()) as RFO[];
   }
 
-  paginateRFOs(noOfItems = 10, lastRFOId: string) {
+  async paginateRFOsByUser(userId: string, lastId: string) {
+    const lastDoc = await this.getLastDoc(lastId)
+    const res = await firebase
+      .firestore()
+      .collection(this.colPath)
+      .where("createdBy", "==", userId)
+      .orderBy("timestamp", "desc")
+      .startAfter(lastDoc)
+      .limit(10)
+      .get();
+    return res.docs.map((r) => r.data()) as RFO[];
+  }
+
+  paginateRFOs(noOfItems = 5, lastRFOId: string) {
     return this.fireS.paginateCol(this.colPath, noOfItems, lastRFOId);
   }
 
   deleteRFO(RFO_Id: string) {
     return this.fireS.deleteDoc(this.colPath, RFO_Id);
+  }
+
+  getLastDoc(id: string) {
+    return firebase.firestore().collection(this.colPath).doc(id).get()
   }
 }
