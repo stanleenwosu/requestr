@@ -4,6 +4,9 @@
       <div *ngIf="vendor && !vendor?.isVerified" class="py-2">
         <h6 class="label text-danger">Account is not Verified yet</h6>
       </div>
+      <div *ngIf="vendor && vendor?.isVerified" class="py-2">
+        <h6 class="label text-success">Your Account is Verified</h6>
+      </div>
       <nb-card>
         <nb-card-header>
           <label class="label">User Information</label>

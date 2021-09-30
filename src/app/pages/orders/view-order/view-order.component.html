@@ -5,25 +5,27 @@
       <ng-container *ngIf="vendorBid">
         <br />
         <span class="text-danger mr-2">You have Already Placed a Bid for this Order</span>
-        <button nbButton size="small" status="default">View</button>
+        <button nbButton size="tiny" status="default">View</button>
       </ng-container>
     </nb-card-header>
     <nb-card-body>
-      <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN">
-        <button class="mx-1" nbButton status="danger" size="medium" (click)="delete()">
-          Delete Order
-        </button>
-      </ng-container>
-      <ng-container *ngIf="userS.UserInfo?.role == role.VENDOR && !vendorBid">
-        <button class="mx-1" nbButton status="success" size="medium" (click)="bid()">
-          Place Bid
-        </button>
-      </ng-container>
-      <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN">
-        <button class="mx-1" nbButton status="primary" size="medium" [routerLink]="['/orders/' + order?.id + '/bids']"
-          [queryParams]="{ orderId: order?.id }">
-          See Bids
-        </button>
+      <ng-container *ngIf="order">
+        <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN">
+          <button class="mx-1" nbButton status="danger" size="medium" (click)="delete()">
+            Delete Order
+          </button>
+        </ng-container>
+        <ng-container *ngIf="userS.UserInfo?.role == role.VENDOR && !vendorBid">
+          <button class="mx-1" nbButton status="success" size="medium" (click)="bid()">
+            Place Bid
+          </button>
+        </ng-container>
+        <ng-container *ngIf="userS.UserInfo?.role == role.ADMIN">
+          <button class="mx-1" nbButton status="primary" size="medium" [routerLink]="['/orders/' + order?.id + '/bids']"
+            [queryParams]="{ orderId: order?.id }">
+            See Bids
+          </button>
+        </ng-container>
       </ng-container>
     </nb-card-body>
   </nb-card>

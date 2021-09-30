@@ -11,6 +11,7 @@ import { UserService } from 'app/services/user.service';
 })
 export class EmployeesComponent implements OnInit {
 
+  role = UserRoles
   form: FormGroup;
   tp = NbGlobalPhysicalPosition.BOTTOM_RIGHT
   staffs: User[]
@@ -18,7 +19,7 @@ export class EmployeesComponent implements OnInit {
   loading = true
   constructor(
     private fb: FormBuilder,
-    private userS: UserService,
+    public userS: UserService,
     private toastr: NbToastrService,
     private appS: AppService
   ) { }
@@ -51,6 +52,7 @@ export class EmployeesComponent implements OnInit {
         timestamp: d,
       };
       await this.userS.addUser(user);
+      this.form.reset()
       this.init()
       this.toastr.success(`${name} added`, "New User", {
         duration: 2000,
