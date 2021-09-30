@@ -1,0 +1,79 @@
+<nb-card>
+  <nb-card-header> </nb-card-header>
+  <nb-card-body>
+    <div class="my-2">
+      <nb-list>
+        <nb-list-item>
+          <label class="label"> Vendor Name: </label>
+          <label
+            ><b>{{ vendor?.id | getName | async }}</b></label
+          >
+        </nb-list-item>
+        <nb-list-item>
+          <label class="label"> Company Name: </label>
+          <label
+            ><b>{{ vendor?.companyName }}</b></label
+          >
+        </nb-list-item>
+        <nb-list-item>
+          <label class="label"> Company Address: </label>
+          <label
+            ><b>{{ vendor?.companyAddress }}</b></label
+          >
+        </nb-list-item>
+        <nb-list-item>
+          <label class="label"> Website: </label>
+          <label
+            ><b>{{ vendor?.website }}</b></label
+          >
+        </nb-list-item>
+        <nb-list-item>
+          <label class="label"> Representative Name: </label>
+          <label
+            ><b>{{ vendor?.repName }}</b></label
+          >
+        </nb-list-item>
+        <nb-list-item>
+          <label class="label"> Representative Number: </label>
+          <label
+            ><b>{{ vendor?.repPhone }}</b></label
+          >
+        </nb-list-item>
+        <nb-list-item>
+          <label class="label">CAC Attachment:</label>
+          <label
+            ><a [href]="vendor?.cac_url" target="_blank">
+              <b>Click to Download </b>
+            </a></label
+          >
+        </nb-list-item>
+        <nb-list-item>
+          <label class="label">Other Attachment:</label>
+          <label
+            ><a [href]="vendor?.document_url" target="_blank">
+              <b>Click to Download </b>
+            </a></label
+          >
+        </nb-list-item>
+        <nb-list-item>
+          <label class="label"> Verification Status </label>
+          <span *ngIf="vendor?.isVerified"
+            ><nb-icon icon="checkmark-circle-2-outline"></nb-icon
+          ></span>
+          <span *ngIf="!vendor?.isVerified"
+            ><nb-icon icon="close-outline"></nb-icon
+          ></span>
+        </nb-list-item>
+      </nb-list>
+    </div>
+    <div class="py-2">
+      <ng-container
+        *ngIf="userS.UserInfo.email == 'Onita.dideolu@vagangroup.com'"
+      >
+        <button nbButton (click)="verify()" size="small" status="primary">
+          <nb-icon icon="checkmark-circle-2-outline"></nb-icon> Vendor
+        </button>
+      </ng-container>
+    </div>
+  </nb-card-body>
+</nb-card>

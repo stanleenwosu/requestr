@@ -38,6 +38,7 @@ export class ProfileComponent implements OnInit {
     this.form = this.fb.group({
       name: [this.user.name, Validators.required],
       email: [this.user.email, Validators.required],
+      password: [this.user.password, Validators.required],
     });
     this.vendorForm = this.fb.group({
       companyName: ["", Validators.required],
@@ -91,6 +92,13 @@ export class ProfileComponent implements OnInit {
         position: this.tp,
       })
     }
+  }
+
+  async updateUser() {
+    this.user.email = this.form.value['email']
+    this.user.name = this.form.value['name']
+    this.user.password = this.form.value['password']
+    await this.userS.updateUser(this.user)
   }
 
   update() {
@@ -164,44 +172,53 @@ export class ProfileComponent implements OnInit {
     } catch (error) { }
   }
 
-  uploadToDB() {
-    if (this.vendor) {
-      this.update();
-    }
-    const uploadTask = firebase
-      .storage()
-      .ref()
-      .child(`files/${this.cac_f.name}`)
-      .putString(this.cac_fu, "data_url");
-    uploadTask.on("state_changed", () => {
-      uploadTask.snapshot.ref
-        .getDownloadURL()
-        .then((cURL) => {
-          const ft = firebase
-            .storage()
-            .ref()
-            .child(`files/${this.atth_f.name}`)
-            .putString(this.atth_fu, "data_url");
-          ft.on("state_changed", () => {
-            ft.snapshot.ref
-              .getDownloadURL()
-              .then((aURL) => {
-                this.add(cURL, aURL);
-              })
-              .catch((err) =>
-                this.toastr.danger(`Upload Error`, err, {
-                  duration: 2000,
-                  position: this.tp,
+  async uploadToDB() {
+
+    await this.updateUser();
+    this.toastr.success(`Profile`, 'Profile update Successful', {
+      duration: 2000,
+      position: this.tp,
+    })
+    if (this.user.role == UserRoles.VENDOR) {
+      if (this.vendor) {
+        this.update();
+      }
+
+      const uploadTask = firebase
+        .storage()
+        .ref()
+        .child(`files/${this.cac_f.name}`)
+        .putString(this.cac_fu, "data_url");
+      uploadTask.on("state_changed", () => {
+        uploadTask.snapshot.ref
+          .getDownloadURL()
+          .then((cURL) => {
+            const ft = firebase
+              .storage()
+              .ref()
+              .child(`files/${this.atth_f.name}`)
+              .putString(this.atth_fu, "data_url");
+            ft.on("state_changed", () => {
+              ft.snapshot.ref
+                .getDownloadURL()
+                .then((aURL) => {
+                  this.add(cURL, aURL);
                 })
-              );
-          });
-        })
-        .catch((err) =>
-          this.toastr.danger(`Upload Error`, err, {
-            duration: 2000,
-            position: this.tp,
+                .catch((err) =>
+                  this.toastr.danger(`Upload Error`, err, {
+                    duration: 2000,
+                    position: this.tp,
+                  })
+                );
+            });
           })
-        );
-    });
+          .catch((err) =>
+            this.toastr.danger(`Upload Error`, err, {
+              duration: 2000,
+              position: this.tp,
+            })
+          );
+      });
+    }
   }
 }

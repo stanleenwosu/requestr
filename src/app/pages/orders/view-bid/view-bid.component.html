@@ -151,68 +151,71 @@
   </nb-card>
 </section>
 
-<section>
-  <nb-card>
-    <nb-card-header>
-      <label class="label">Bid Approval Information</label>
-    </nb-card-header>
-    <nb-card-body>
-      <nb-list>
-        <nb-list-item>
-          <label class="label"> Bid Status: </label>
-          <label
-            ><b>{{ bid?.status }}</b></label
-          >
-        </nb-list-item>
-        <nb-list-item>
-          <div>
-            <label class="label"> Staff Approval: </label>
+
+<ng-container *ngIf="userS.UserInfo?.role !== role.VENDOR">
+  <section>
+    <nb-card>
+      <nb-card-header>
+        <label class="label">Bid Approval Information</label>
+      </nb-card-header>
+      <nb-card-body>
+        <nb-list>
+          <nb-list-item>
+            <label class="label"> Bid Status: </label>
             <label
-              ><b>{{ bid?.staffDecision?.status }}</b></label
+              ><b>{{ bid?.status }}</b></label
             >
-          </div>
-          <div>
-            <label class="label"
-              >By: <b>{{ bid?.staffDecision?.userId }}</b></label
-            >
-            <label class="label"
-              >On: <b>{{ bid?.staffDecision?.timestamp | date }}</b></label
-            >
-          </div>
-        </nb-list-item>
-        <nb-list-item>
-          <div>
-            <label class="label"> Admin Approval: </label>
-            <label
-              ><b>{{ bid?.adminDecision?.status }}</b></label
-            >
-          </div>
-          <div>
-            <label class="label"
-              >By: <b>{{ bid?.adminDecision?.userId }}</b></label
-            >
-            <label class="label"
-              >On: <b>{{ bid?.adminDecision?.timestamp | date }}</b></label
-            >
-          </div>
-        </nb-list-item>
-        <nb-list-item>
-          <div>
-            <label class="label">Super Admin Approval: </label>
-            <label
-              ><b>{{ bid?.superDecision?.status }}</b></label
-            >
-          </div>
-          <div>
-            <label class="label"
-              >By: <b>{{ bid?.superDecision?.userId }}</b></label
-            >
-            <label class="label"
-              >On: <b>{{ bid?.superDecision?.timestamp | date }}</b></label
-            >
-          </div>
-        </nb-list-item>
-      </nb-list>
-    </nb-card-body>
-  </nb-card>
-</section>
+          </nb-list-item>
+          <nb-list-item>
+            <div>
+              <label class="label"> Staff Approval: </label>
+              <label
+                ><b>{{ bid?.staffDecision?.status }}</b></label
+              >
+            </div>
+            <div>
+              <label class="label"
+                >By: <b>{{ bid?.staffDecision?.userId }}</b></label
+              >
+              <label class="label"
+                >On: <b>{{ bid?.staffDecision?.timestamp | date }}</b></label
+              >
+            </div>
+          </nb-list-item>
+          <nb-list-item>
+            <div>
+              <label class="label"> Admin Approval: </label>
+              <label
+                ><b>{{ bid?.adminDecision?.status }}</b></label
+              >
+            </div>
+            <div>
+              <label class="label"
+                >By: <b>{{ bid?.adminDecision?.userId }}</b></label
+              >
+              <label class="label"
+                >On: <b>{{ bid?.adminDecision?.timestamp | date }}</b></label
+              >
+            </div>
+          </nb-list-item>
+          <nb-list-item>
+            <div>
+              <label class="label">Super Admin Approval: </label>
+              <label
+                ><b>{{ bid?.superDecision?.status }}</b></label
+              >
+            </div>
+            <div>
+              <label class="label"
+                >By: <b>{{ bid?.superDecision?.userId }}</b></label
+              >
+              <label class="label"
+                >On: <b>{{ bid?.superDecision?.timestamp | date }}</b></label
+              >
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
+  </section>
+</ng-container>

@@ -2,7 +2,8 @@
 
 export interface PurchaseOrder {
   id: string;
-  rfoId: string
+  rfoId: string;
+  name:string;
   createdOn: number
   createdBy: string
   approvedBy:string

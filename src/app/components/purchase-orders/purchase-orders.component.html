@@ -3,15 +3,18 @@
     <label class="ml1 label">Id</label>
   </div>
   <div class="col-md-3">
+    <label class="ml1 label"> Name</label>
+  </div>
+  <div *ngIf="userRole !== role.VENDOR" class="col-md-2">
     <label class="ml1 label"> Ordered By</label>
   </div>
-  <div class="col-md-3">
+  <div *ngIf="userRole !== role.VENDOR" class="col-md-2">
     <label class="ml1 label"> Approved By</label>
   </div>
   <div class="col-md-2">
     <label class="label">Created On</label>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-1">
     <label class="label">Status</label>
   </div>
 </div>
@@ -26,18 +29,25 @@
     <div class="list-item-inner">
       <div class="row">
         <div class="col-md-2">
-          <span class="fs">{{ o.id }}</span>
+          <span class="fs">{{ o?.id }}</span>
         </div>
         <div class="col-md-3">
-          <span class="fs">{{ o.createdBy | getName | async }}</span>
+          <span class="fs">{{ o?.name }}</span>
         </div>
-        <div class="col-md-3">
-          <span class="fs">{{ o.approvedBy | getName | async }}</span>
+        <div *ngIf="userRole !== role.VENDOR" class="col-md-2">
+          <ng-container>
+            <span class="fs">{{ o?.createdBy | getName | async }}</span>
+          </ng-container>
+        </div>
+        <div *ngIf="userRole !== role.VENDOR" class="col-md-2">
+          <ng-container>
+            <span class="fs">{{ o?.approvedBy | getName | async }}</span>
+          </ng-container>
         </div>
         <div class="col-md-2">
-          <span class="fs">{{ o.createdOn | date }}</span>
+          <span class="fs">{{ o?.createdOn | date }}</span>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
           <div class="font-weight-bold badge pj-badge" [ngClass]="{
               completed: o.status == ps.BIDDING,
               completed: o.status == ps.ASSIGNED,
@@ -48,7 +58,7 @@
           </div>
         </div>
         <div class="col-md-2">
-        <!--   <button type="button" nbButton size="small" status="default">
+          <!--   <button type="button" nbButton size="small" status="default">
             Place Bid
           </button> -->
         </div>
@@ -56,6 +66,11 @@
     </div>
   </nb-list-item>
   <nb-list-item *ngIf="ordersInView.length == 0">
-    <label class="text-center" *ngIf="loadingOrders === false">No Current Orders</label>
+    <label class="text-center label" *ngIf="loadingOrders === false">No Current Orders</label>
   </nb-list-item>
 </nb-list>
+<div class="text-center py-2" *ngIf="canPaginate && !loadingOrders">
+  <button nbButton size="small" status="primary" (click)="paginate()">
+    Load More
+  </button>
+</div>

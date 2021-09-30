@@ -1,0 +1,16 @@
+<nb-card>
+  <nb-card-header>
+    <label class="label">{{ title }}</label>
+  </nb-card-header>
+  <nb-card-body>
+    <ng-container *ngIf="type=='success'">
+      <p>{{ message }}</p>
+    </ng-container>
+    <ng-container *ngIf="type=='error'">
+      <p>{{ message }}</p>
+    </ng-container>
+    <div>
+      <button nbButton size="small" status="primary" (click)="dialogRef.close()">Close</button>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -8,4 +8,5 @@ export interface Vendor {
   repPhone: string
   cac_url: string
   document_url: string
+  isVerified?:boolean
 }

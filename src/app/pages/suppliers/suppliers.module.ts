@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SuppliersComponent } from './suppliers.component';
-import { RouterModule } from '@angular/router';
-import { NbButtonModule, NbCardModule, NbListModule } from '@nebular/theme';
-
-const nb = [
-  NbListModule,
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { SuppliersComponent } from "./suppliers.component";
+import { RouterModule } from "@angular/router";
+import {
+  NbButtonModule,
   NbCardModule,
-  NbButtonModule
-]
+  NbIconModule,
+  NbListModule,
+} from "@nebular/theme";
+
+const nb = [NbListModule, NbCardModule, NbButtonModule, NbIconModule];
 
 @NgModule({
   declarations: [SuppliersComponent],
@@ -16,11 +17,18 @@ const nb = [
     CommonModule,
     RouterModule.forChild([
       {
-        path:'',
-        component: SuppliersComponent
-      }
+        path: "",
+        component: SuppliersComponent,
+      },
+      {
+        path: ":id",
+        loadChildren: () =>
+          import("./view-supplier/view-supplier.module").then(
+            (m) => m.ViewSupplierModule
+          ),
+      },
     ]),
-    ...nb
-  ]
+    ...nb,
+  ],
 })
-export class SuppliersModule { }
+export class SuppliersModule {}

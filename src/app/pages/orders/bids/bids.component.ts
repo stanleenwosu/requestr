@@ -27,6 +27,7 @@ export class BidsComponent implements OnInit {
 
   async init() {
     this.filter = this.route.snapshot.data['filter']
+    console.log(this.filter)
     if (this.filter === 'vendor') {
       this.bids = await this.orderS.getBidsByVendor(this.userS.UserInfo.id)
     }

@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NbAlertModule, NbButtonModule,NbCheckboxModule, NbInputModule, NbIconModule, NbToastrModule, NbSelectModule } from '@nebular/theme';
 import { RegisterComponent } from './register/register.component';
 import { LoginHandlerComponent } from './login-handler/login-handler.component';
+import { ComponentsModule } from 'app/components/components.module';
 
 
 
@@ -29,6 +30,7 @@ const AuthComponents = [
     NbToastrModule,
     NbSelectModule,
     NbIconModule,
+    ComponentsModule,
     RouterModule.forChild([
       {
         path: '',

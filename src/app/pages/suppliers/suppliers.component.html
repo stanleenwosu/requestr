@@ -1,28 +1,42 @@
 <section>
   <div>
     <nb-card>
-      <nb-card-header>
-        All Vendors
-      </nb-card-header>
+      <nb-card-header> All Vendors </nb-card-header>
       <nb-card-body>
         <nb-list>
           <nb-list-item>
             <div class="row w-100">
-              <div class="col-2"><label class="label">ID</label></div>
-              <div class="col-3"><label class="label">Name</label></div>
-              <div class="col-3"><label class="label">Email</label></div>
-              <div class="col-2"><label class="label">Joined On</label></div>
-              <div class="col-2"></div>
+              <div class="col-md-4"><label class="label">Name</label></div>
+              <div class="col-md-4"><label class="label">Email</label></div>
+              <div class="col-md-2"><label class="label">Verified</label></div>
+              <div class="col-md-2"></div>
             </div>
           </nb-list-item>
           <nb-list-item *ngFor="let v of vendors">
             <div class="row w-100">
-              <div class="col-2"><label class="label">{{ v?.id }}</label></div>
-              <div class="col-3"><label>{{ v?.name }}</label></div>
-              <div class="col-3"><label>{{ v?.email }}</label></div>
-              <div class="col-2"><label>{{ v?.createdOn }}</label></div>
-              <div class="col-2">
-                <button nbButton size="small" status="primary">View Profile</button>
+              <div class="col-md-4">
+                <label>{{ v?.name }}</label>
+              </div>
+              <div class="col-md-4">
+                <label>{{ v?.email }}</label>
+              </div>
+              <div class="col-md-2">
+                <span *ngIf="v?.isVerified"
+                  ><nb-icon icon="checkmark-circle-2-outline"></nb-icon
+                ></span>
+                <span *ngIf="!v?.isVerified"
+                  ><nb-icon icon="close-outline"></nb-icon
+                ></span>
+              </div>
+              <div class="col-md-2">
+                <button
+                  (click)="view(v?.id)"
+                  nbButton
+                  size="tiny"
+                  status="primary"
+                >
+                  View Profile
+                </button>
               </div>
             </div>
           </nb-list-item>

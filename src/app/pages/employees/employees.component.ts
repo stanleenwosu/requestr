@@ -38,18 +38,20 @@ export class EmployeesComponent implements OnInit {
     this.loading = false
     return;
   }
-  submit() {
+  async submit() {
     const d = Date.now();
-    const { name, email } = this.form.value;
+    const { name, email, role } = this.form.value;
     try {
       const user: User = {
         id: "user_" + d,
         name: name,
         email: email,
+        role: role,
         password: this.appS.generatePassword(),
         timestamp: d,
       };
-      this.userS.addUser(user);
+      await this.userS.addUser(user);
+      this.init()
       this.toastr.success(`${name} added`, "New User", {
         duration: 2000,
         position: this.tp,

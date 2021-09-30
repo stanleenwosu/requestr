@@ -58,6 +58,7 @@ export class ViewRequestComponent implements OnInit {
     const newOrder: PurchaseOrder = {
       id: 'pco_' + d,
       rfoId: this.rfo.id,
+      name: `Order for Request - ${this.rfo.name}`,
       bids: [],
       timestamp: d,
       createdOn: d,

@@ -43,14 +43,14 @@ export class UserService {
 
   async addUser(user: User) {
     const res = await this.uDB.where('email', '==', user.email).get()
-    console.log(res)
+    console.log(res.docs)
     if (res.docs.length > 0) {
       throw new Error("User Exists");
     }
-    return this.uDB.doc(user.id).set(user)
+    return await this.uDB.doc(user.id).set(user)
   }
 
-  async updateUser(user:User) {
+  async updateUser(user: User) {
     return await this.uDB.doc(user.id).update(user)
   }
 

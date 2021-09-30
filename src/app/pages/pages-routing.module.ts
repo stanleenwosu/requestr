@@ -54,7 +54,7 @@ const routes: Routes = [
         loadChildren: () =>
           import("./orders/bids/bids.module").then((m) => m.BidsModule),
         data: {
-          filter: "staff",
+          filter: "vendor",
         },
       },
       {
