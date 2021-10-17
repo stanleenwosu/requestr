@@ -8,6 +8,7 @@ export interface User {
   picture?: string;
   role?: UserRoles;
   timestamp: number;
+  isVerified?: boolean;
 }
 
 

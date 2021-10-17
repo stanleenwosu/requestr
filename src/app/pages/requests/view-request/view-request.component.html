@@ -44,6 +44,12 @@
         <nb-list>
           <nb-list-item>
             <span>
+              <label class="label">Grand Total:</label>
+              <label><b>{{ total | currency: "NGN " }}</b></label>
+            </span>
+          </nb-list-item>
+          <nb-list-item>
+            <span>
               <label class="label">Created By:</label>
               <label><b>{{ rfo?.createdBy | getName | async }}</b></label>
             </span>

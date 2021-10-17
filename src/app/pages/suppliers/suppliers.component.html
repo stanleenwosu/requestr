@@ -21,10 +21,10 @@
                 <label>{{ v?.email }}</label>
               </div>
               <div class="col-md-2">
-                <span *ngIf="v?.isVerified"
+                <span *ngIf="v?.isVerified" class="text-success"
                   ><nb-icon icon="checkmark-circle-2-outline"></nb-icon
                 ></span>
-                <span *ngIf="!v?.isVerified"
+                <span *ngIf="!v?.isVerified" class="text-danger"
                   ><nb-icon icon="close-outline"></nb-icon
                 ></span>
               </div>
@@ -41,6 +41,15 @@
             </div>
           </nb-list-item>
         </nb-list>
+        <div *ngIf="isEmpty" class="text-center py-2">
+          <p class="label text-center">No Suppliers on List</p>
+        </div>
+
+        <div *ngIf="!isEmpty" class="text-center py-2">
+          <button nbButton status="primary" size="small" (click)="paginate()">
+            Load More
+          </button>
+        </div>
       </nb-card-body>
     </nb-card>
   </div>

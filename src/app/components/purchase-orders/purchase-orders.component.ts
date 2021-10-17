@@ -39,7 +39,7 @@ export class PurchaseOrdersComponent implements OnInit {
       this.ordersInView = await this.orderS.getPurchaseOrders();
       this.lastOrderId = this.ordersInView[this.ordersInView.length - 1].id;
     }
-    if (this.ordersInView.length < 10) this.canPaginate = false;
+    if (this.ordersInView.length < 5) this.canPaginate = false;
     this.loadingOrders = false;
   }
 
@@ -57,8 +57,8 @@ export class PurchaseOrdersComponent implements OnInit {
     } else {
       moreData = await this.orderS.paginatePurchaseOrders(this.lastOrderId);
     }
-    if (moreData.length < 10) this.canPaginate = false;
-    this.ordersInView = [...this.ordersInView, ...moreData];
+    if (moreData.length < 5) this.canPaginate = false;
+    this.ordersInView = [...moreData, ...this.ordersInView];
     this.lastOrderId = this.ordersInView[this.ordersInView.length - 1].id;
   }
 }

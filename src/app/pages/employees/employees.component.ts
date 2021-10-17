@@ -16,6 +16,7 @@ export class EmployeesComponent implements OnInit {
   tp = NbGlobalPhysicalPosition.BOTTOM_RIGHT
   staffs: User[]
   admins: User[]
+  supers: User[]
   loading = true
   constructor(
     private fb: FormBuilder,
@@ -36,6 +37,13 @@ export class EmployeesComponent implements OnInit {
   async init() {
     this.staffs = await this.userS.getStaffs()
     this.admins = await this.userS.getAdmins()
+    this.supers = await this.userS.getSupers()
+    if (this.userS.UserInfo.role == UserRoles.ADMIN) {
+      this.admins = this.admins.filter(a => a.id !== this.userS.UserInfo.id)
+    }
+    if (this.userS.UserInfo.role == UserRoles.SUPER) {
+      this.admins = this.supers.filter(s => s.id !== this.userS.UserInfo.id)
+    }
     this.loading = false
     return;
   }
@@ -66,7 +74,7 @@ export class EmployeesComponent implements OnInit {
   generatePassword() { }
 
 
-  async makeAdmin(uid:string) {
+  async makeAdmin(uid: string) {
     const res = this.admins.filter(u => u.id === uid)
     if (res.length > 0) {
       this.appS.showToast('danger', 'User is aleady an Admin', 'Staffs')
@@ -83,9 +91,26 @@ export class EmployeesComponent implements OnInit {
     }
   }
 
+  async makeSuper(uid: string) {
+    const res = this.supers.filter(u => u.id === uid)
+    if (res.length > 0) {
+      this.appS.showToast('danger', 'User is aleady a Super Admin', 'Staffs')
+      return
+    }
+    try {
+      let user = await this.userS.getUser(uid)
+      user.role = UserRoles.SUPER
+      this.userS.updateUser(user)
+      this.appS.showToast('success', 'User is now an Super Admin', 'Staffs')
+      this.init()
+    } catch (error) {
+      this.appS.showToast('danger', error, 'Staffs')
+    }
+  }
 
 
-  async makeStaff(uid:string) {
+
+  async makeStaff(uid: string) {
     const res = this.staffs.filter(u => u.id === uid)
     if (res.length > 0) {
       this.appS.showToast('danger', 'User is aleady a Staff', 'Staffs')

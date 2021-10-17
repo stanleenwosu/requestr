@@ -40,6 +40,13 @@ const routes = [
       ),
   },
   {
+    path: "search",
+    loadChildren: () =>
+      import("./search/search.module").then(
+        (m) => m.SearchModule
+      ),
+  },
+  {
     path: ":id",
     loadChildren: () =>
       import("./view-request/view-request.module").then(

@@ -9,10 +9,10 @@
     </div>
   </nb-list-item>
   <nb-list-item class="col-12 list-item" *ngFor="let r of requestsInView" [ngClass]="{
-      brCompleted: r.status == rs.APPROVED,
-      brInprogress: r.status == rs.PENDING,
-      brCancelled: r.status == rs.CANCELLED
-    }" (click)="view(r.id)">
+      brCompleted: r?.status == rs.APPROVED,
+      brInprogress: r?.status == rs.PENDING,
+      brCancelled: r?.status == rs.CANCELLED
+    }" (click)="view(r?.id)">
     <div class="list-item-inner">
       <div class="row">
         <div class="col-lg-4">

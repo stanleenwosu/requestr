@@ -1,0 +1,87 @@
+<section>
+  <nb-card>
+    <nb-card-header>Search for a Request</nb-card-header>
+    <nb-card-body>
+      <div>
+        <div class="row">
+          <div class="col-md-9">
+            <input nbInput fullWidth type="text" [(ngModel)]="searchTerm" placeholder="Enter Request ID"
+              class="form-control" />
+          </div>
+          <div class="col-md-3">
+            <button nbButton outline status="primary" [disabled]="searchTerm == ''" (click)="search()">
+              <nb-icon icon="search-outline"></nb-icon>
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</section>
+
+<section>
+  <div *ngIf="searched">
+    <nb-card>
+      <nb-card-header></nb-card-header>
+      <nb-card-body>
+        <div *ngIf="requestsInView.length > 0; else noRFO">
+          <nb-list [nbSpinner]="searching">
+            <nb-list-item>
+              <div class="row w-100">
+                <div class="col-lg-4"><label class="label">Title</label></div>
+                <div class="col-lg-2"><label class="label">Created By</label></div>
+                <div class="col-lg-2"><label class="label">Created On</label></div>
+                <div class="col-lg-2"><label class="label">Type</label></div>
+                <div class="col-lg-2"><label class="label">Status</label></div>
+              </div>
+            </nb-list-item>
+            <nb-list-item class="col-12 list-item" *ngFor="let r of requestsInView" [ngClass]="{
+              brCompleted: r?.status == rs.APPROVED,
+              brInprogress: r?.status == rs.PENDING,
+              brCancelled: r?.status == rs.CANCELLED
+            }" (click)="view(r?.id)">
+              <div class="list-item-inner w-100">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <span class="fs">{{ r?.name }}</span>
+                  </div>
+                  <div class="col-2">
+                    <span class="fs"><i class="fa fa-user mr-1" aria-hidden="true"></i>{{ r?.createdBy | getName | async
+                      }}</span>
+                  </div>
+                  <div class="col-2">
+                    <span class="fs">{{ r?.createdOn | date }}</span>
+                  </div>
+                  <div class="col-2">
+                    <span class="fs">{{ r?.type | uppercase }}</span>
+                    <!-- <span *ngIf="
+                    todayDate > r?.deadline &&
+                    r.status == rs.PENDING
+                  " class="text-danger">
+                    <nb-icon icon="clock-outline"></nb-icon>
+                  </span> -->
+                  </div>
+                  <div class="col-2">
+                    <div class="font-weight-bold badge pj-badge" [ngClass]="{
+                      completed: r.status == rs.APPROVED,
+                      inprogress: r.status == rs.PENDING,
+                      cancelled: r.status == rs.CANCELLED
+                    }">
+                      {{ r.status | uppercase }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-list-item>
+          </nb-list>
+        </div>
+        <ng-template #noRFO>
+          <div class="text-center">
+            <h6>No Request found</h6>
+          </div>
+        </ng-template>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</section>

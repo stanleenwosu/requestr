@@ -22,13 +22,13 @@ export class OrdersService {
     return this.fireS.getDoc(this.ordColPath, id) as Promise<PurchaseOrder>;
   }
 
-  getPurchaseOrders(noOfItems = 10) {
+  getPurchaseOrders(noOfItems = 5) {
     return this.fireS.getColWithLimit(this.ordColPath, noOfItems) as Promise<
       PurchaseOrder[]
     >;
   }
 
-  paginatePurchaseOrders(lastId: string, noOfItems = 10) {
+  paginatePurchaseOrders(lastId: string, noOfItems = 5) {
     return this.fireS.paginateCol(
       this.ordColPath,
       noOfItems,
@@ -36,7 +36,7 @@ export class OrdersService {
     ) as Promise<PurchaseOrder[]>;
   }
 
-  async getPurchaseOrdersByUserId(userId: string, noOfItems = 10) {
+  async getPurchaseOrdersByUserId(userId: string, noOfItems = 5) {
     const res = await this.db
       .collection(this.ordColPath)
       .orderBy("timestamp", "desc")

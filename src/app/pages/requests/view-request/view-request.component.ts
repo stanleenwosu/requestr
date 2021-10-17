@@ -23,6 +23,7 @@ export class ViewRequestComponent implements OnInit {
     message: '',
     comment: null
   }
+  total: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -35,12 +36,12 @@ export class ViewRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.init()
-    console.log(this.userS.UserInfo)
   }
 
   async init() {
     const rfo_id = this.route.snapshot.params['id']
     this.rfo = await this.reqS.getRFO(rfo_id)
+    this.total = this.rfo.items.reduce((acc, cur) => acc + parseInt(cur.total), 0)
   }
 
   cancel() {

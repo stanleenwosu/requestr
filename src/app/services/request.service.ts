@@ -8,8 +8,8 @@ import { FirebaseService } from "./firebase.service";
   providedIn: "root",
 })
 export class RequestService {
-  rfoDB = firebase.firestore().collection("RFOs");
-  colPath = "RFOs";
+  private rfoDB = firebase.firestore().collection("RFOs");
+  private colPath = "RFOs";
   constructor(private fireS: FirebaseService) { }
 
   addRFO(rfo: RFO) {
@@ -67,5 +67,10 @@ export class RequestService {
 
   getLastDoc(id: string) {
     return firebase.firestore().collection(this.colPath).doc(id).get()
+  }
+
+  async searchRFO(searchTerm: string) {
+    const res = await this.rfoDB.where('id', '==', searchTerm).get();
+    return res.docs.map((r) => r.data()) as RFO[];
   }
 }

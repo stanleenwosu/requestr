@@ -88,4 +88,11 @@ export class UserService {
     return (res.docs.map(r => r.data())) as User[]
   }
 
+  async getSupers() {
+    const res = await this.uDB
+      .where('role', '==', UserRoles.SUPER)
+      .get();
+    return (res.docs.map(r => r.data())) as User[]
+  }
+
 }
