@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { SuppliersComponent } from "./suppliers.component";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule } from "@angular/router";
 import {
   NbButtonModule,
@@ -15,6 +16,8 @@ const nb = [NbListModule, NbCardModule, NbButtonModule, NbIconModule];
   declarations: [SuppliersComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: "",

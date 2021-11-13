@@ -49,7 +49,7 @@
       </nb-list>
     </div>
     <div class="py-2">
-      <ng-container *ngIf="userS.UserInfo.email == 'Onita.dideolu@vagangroup.com'">
+      <ng-container *ngIf="userS.UserInfo.email === verifier">
         <button nbButton (click)="verify()" size="small" status="primary">
           <nb-icon icon="checkmark-circle-2-outline"></nb-icon>Verify Vendor
         </button>

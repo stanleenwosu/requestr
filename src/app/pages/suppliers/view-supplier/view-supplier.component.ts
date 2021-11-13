@@ -13,6 +13,7 @@ import { VendorService } from 'app/services/vendor.service';
 export class ViewSupplierComponent implements OnInit {
 
   vendor: Vendor
+  verifier = ''
   constructor(
     private route: ActivatedRoute,
     private vendorS: VendorService,
@@ -25,6 +26,7 @@ export class ViewSupplierComponent implements OnInit {
   }
 
   async init() {
+    this.verifier = await this.vendorS.getVerifier()
     this.vendor = await this.vendorS.getVendorInfo(this.route.snapshot.params.id)
   }
 

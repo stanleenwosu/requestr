@@ -67,6 +67,7 @@ export class VendorService {
   }
 
   async setVerifier(email: string) {
+    console.log(email)
     await firebase
       .firestore()
       .collection("settings")
