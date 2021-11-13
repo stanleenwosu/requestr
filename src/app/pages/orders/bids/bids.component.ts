@@ -35,6 +35,7 @@ export class BidsComponent implements OnInit {
     if (this.filter === 'order') {
       this.orderId = this.route.snapshot.queryParams['orderId']
       this.bids = await this.orderS.getBidsByOrderId(this.orderId)
+      console.log(this.bids)
     }
 
   }

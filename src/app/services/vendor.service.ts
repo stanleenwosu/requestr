@@ -35,7 +35,7 @@ export class VendorService {
   }
 
   async paginate(limit = 10, lastId: string) {
-    const lastDoc = await this.getLastDoc(lastId)
+    const lastDoc = await this.getLastDoc(lastId);
     const res = await this.db
       .orderBy("timestamp", "desc")
       .where("role", "==", UserRoles.VENDOR)
@@ -54,6 +54,23 @@ export class VendorService {
   }
 
   getLastDoc(id: string) {
-    return this.vDb.doc(id).get()
+    return this.vDb.doc(id).get();
+  }
+
+  async getVerifier() {
+    const res = await firebase
+      .firestore()
+      .collection("settings")
+      .doc("vendor")
+      .get();
+      return res.data().verifier
+  }
+
+  async setVerifier(email: string) {
+    await firebase
+      .firestore()
+      .collection("settings")
+      .doc("vendor")
+      .set({ verifier: email });
   }
 }

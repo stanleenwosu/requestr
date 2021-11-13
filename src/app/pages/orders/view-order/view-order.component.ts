@@ -10,6 +10,7 @@ import { NbDialogService } from "@nebular/theme";
 import { PlaceBidComponent } from "app/components/place-bid/place-bid.component";
 import { VendorService } from "app/services/vendor.service";
 import { MessageComponent } from "app/components/message/message.component";
+import { AppService } from "app/services/app.service";
 
 @Component({
   selector: "view-order",
@@ -23,6 +24,7 @@ export class ViewOrderComponent implements OnInit {
   vendorBid: boolean;
   role = UserRoles;
   isVendorVerified: boolean;
+  total:number;
   constructor(
     private orderS: OrdersService,
     private reqS: RequestService,
@@ -30,7 +32,8 @@ export class ViewOrderComponent implements OnInit {
     private router: Router,
     public userS: UserService,
     private dialogS: NbDialogService,
-    private vendorS: VendorService
+    private vendorS: VendorService,
+    public appS: AppService
   ) { }
 
   ngOnInit(): void {
@@ -41,18 +44,21 @@ export class ViewOrderComponent implements OnInit {
     const oId = this.route.snapshot.params["id"];
     this.order = await this.orderS.getPurchaseOrder(oId);
     this.rfo = await this.reqS.getRFO(this.order.rfoId);
-    if (this.userS.UserInfo.role !== this.role.VENDOR)
+    this.total = this.rfo.items.reduce((acc, cur) => acc + parseInt(cur.total), 0)
+    if (this.userS.UserInfo.role !== this.role.VENDOR) {
       this.bids = await this.orderS.getBidsByOrderId(this.order.id);
-    const vBid = await this.orderS.getBidsByOrderIdandVendorId(
-      this.order.id,
-      this.userS.UserInfo.id)
-    console.log(vBid)
-    this.vendorBid = vBid
-      ? true
-      : false;
-    this.isVendorVerified = (
-      await this.vendorS.getVendorInfo(this.userS.UserInfo.id)
-    ).isVerified;
+    } else {
+      const vBid = await this.orderS.getBidsByOrderIdandVendorId(
+        this.order.id,
+        this.userS.UserInfo.id)
+      console.log(vBid)
+      this.vendorBid = vBid
+        ? true
+        : false;
+      this.isVendorVerified = (
+        await this.vendorS.getVendorInfo(this.userS.UserInfo.id)
+      ).isVerified;
+    }
   }
 
   bid() {

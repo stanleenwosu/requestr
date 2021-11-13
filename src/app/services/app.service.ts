@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { UserRoles } from 'app/@core/data/users';
+import { UserService } from './user.service';
 
 
 @Injectable({
@@ -9,7 +11,8 @@ export class AppService {
 
   tp = NbGlobalPhysicalPosition.BOTTOM_RIGHT
   constructor(
-    private toastr: NbToastrService
+    private toastr: NbToastrService,
+    private userS: UserService
   ) { }
 
   showToast(type: 'success' | 'danger', message: string, title?: string) {
@@ -58,5 +61,13 @@ export class AppService {
 
   ObjectToArray() {
 
+  }
+
+  isAdmin() {
+    return (this.userS.UserInfo?.role === UserRoles.ADMIN) || (this.userS.UserInfo?.role === UserRoles.SUPER)
+  }
+
+  isSuper () {
+    return (this.userS.UserInfo?.role === UserRoles.SUPER)
   }
 }

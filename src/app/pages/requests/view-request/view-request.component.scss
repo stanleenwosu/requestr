@@ -1,3 +1,18 @@
 b {
   padding-left: 1rem;
 }
+
+.grand-total {
+  width: 100%;
+  margin-bottom: 0;
+  text-align: end;
+  margin-right: 9rem;
+}
+
+@media (max-width: 360px) {
+  .grand-total {
+    width: auto;
+    text-align: start;
+    margin: 0;
+  }
+}

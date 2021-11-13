@@ -1,10 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { User } from "app/@core/data/users";
+import { User, UserRoles } from "app/@core/data/users";
 import { VendorService } from "app/services/vendor.service";
-import { from } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { UserService } from "app/services/user.service";
+import { AppService } from "app/services/app.service";
 
 @Component({
   selector: "suppliers",
@@ -15,20 +14,27 @@ export class SuppliersComponent implements OnInit {
   vendors: User[] = [];
   loadingVendors = true;
   isEmpty: boolean = false;
-  constructor(private vendorS: VendorService, private router: Router) { }
+  role = UserRoles;
+  verifier = "";
+  constructor(
+    private vendorS: VendorService,
+    private router: Router,
+    public userS: UserService,
+    private appS: AppService
+  ) {}
 
   ngOnInit(): void {
     this.init();
   }
 
   async init() {
-    //this.vendors = await this.vendorS.getVendors();
+    this.getVerifier();
     this.vendors = await this.vendorS.getVendors();
-    if ( this.vendors.length < 10) this.isEmpty = true;
-    this.vendors.forEach(async v => {
-      const vd = await this.vendorS.getVendorInfo(v.id)
-      v.isVerified = vd && vd.isVerified ? true : false
-    })
+    if (this.vendors.length < 10) this.isEmpty = true;
+    this.vendors.forEach(async (v) => {
+      const vd = await this.vendorS.getVendorInfo(v.id);
+      v.isVerified = vd && vd.isVerified ? true : false;
+    });
   }
 
   view(vendorId: string) {
@@ -36,12 +42,24 @@ export class SuppliersComponent implements OnInit {
   }
 
   async loadmore() {
-    const more = await this.vendorS.paginate(10, this.vendors[this.vendors.length - 1].id)
-    more.forEach(async v => {
-      const vd = await this.vendorS.getVendorInfo(v.id)
-      v.isVerified = vd && vd.isVerified ? true : false
-    })
-    this.vendors = [...more, ...this.vendors]
+    const more = await this.vendorS.paginate(
+      10,
+      this.vendors[this.vendors.length - 1].id
+    );
+    more.forEach(async (v) => {
+      const vd = await this.vendorS.getVendorInfo(v.id);
+      v.isVerified = vd && vd.isVerified ? true : false;
+    });
+    this.vendors = [...more, ...this.vendors];
     if (more.length < 10) this.isEmpty = true;
+  }
+
+  async makeVerifier() {
+    await this.vendorS.setVerifier(this.verifier);
+    this.appS.showToast('success', 'Verifier Modified')
+  }
+
+  async getVerifier() {
+    this.verifier = await this.vendorS.getVerifier();
   }
 }

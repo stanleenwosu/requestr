@@ -28,6 +28,10 @@ export class ViewSupplierComponent implements OnInit {
     this.vendor = await this.vendorS.getVendorInfo(this.route.snapshot.params.id)
   }
 
+  getVerifier(){
+
+  }
+
   async verify() {
     this.vendor.isVerified = true
     await this.vendorS.updateVendor(this.vendor)
