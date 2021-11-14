@@ -18,6 +18,7 @@ export class EmployeesComponent implements OnInit {
   admins: User[]
   supers: User[]
   loading = true
+  newUserPassword = ''
   constructor(
     private fb: FormBuilder,
     public userS: UserService,
@@ -29,12 +30,13 @@ export class EmployeesComponent implements OnInit {
     this.form = this.fb.group({
       name: [""],
       email: ["", [Validators.required, Validators.email]],
-      role: ["", Validators.required],
+      role: ["", Validators.required]
     });
     this.init()
   }
 
   async init() {
+    this.newUserPassword = this.appS.generatePassword()
     this.staffs = await this.userS.getStaffs()
     this.admins = await this.userS.getAdmins()
     this.supers = await this.userS.getSupers()
@@ -56,9 +58,10 @@ export class EmployeesComponent implements OnInit {
         name: name,
         email: email,
         role: role,
-        password: this.appS.generatePassword(),
+        password: this.newUserPassword,
         timestamp: d,
       };
+      this.newUserPassword = user.password;
       await this.userS.addUser(user);
       this.form.reset()
       this.init()

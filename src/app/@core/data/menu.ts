@@ -35,7 +35,7 @@ export const MENU_ITEMS: AppMenu[] = [
     role: [UserRoles.STAFF, UserRoles.SUPER]
   },
   {
-    title: 'Purchase Orders',
+    title: 'RFQ',
     icon: 'shopping-bag-outline',
     link: '/orders',
     home: true,
